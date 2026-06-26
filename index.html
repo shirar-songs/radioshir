@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>רדיושיר</title>
+    <title>הרדיו שלי</title>
     <style>
         /* עיצוב כללי של הדף - גווני שמנת ובורדו */
         body {
@@ -24,30 +24,53 @@
             background: #f7f3e9; /* שמנת מעט כהה יותר לקופסה המרכזית */
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(74, 14, 23, 0.1); /* צל עדין בגוון בורדו מוחלש */
+            box-shadow: 0 8px 20px rgba(74, 14, 23, 0.1);
             margin-top: 20px;
             border: 1px solid #eadecc;
         }
 
-        h1 {
-            color: #800020; /* צבע בורדו קלאסי עמוק */
-            font-size: 26px;
-            margin-bottom: 5px;
+        /* מיקום הלוגו שלך */
+        .logo-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-placeholder {
+            width: 150px;
+            height: 150px;
+            background-color: #eadecc;
+            border: 2px dashed #800020;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #800020;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .logo-image {
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+            display: none; /* ישתנה לבלוק כשתוסיפי תמונה */
         }
 
         .subtitle {
-            color: #6b5b52; /* צבע חום-אפרפר עדין שמשתלב מעולה עם שמנת */
+            color: #6b5b52;
             font-size: 14px;
             margin-bottom: 25px;
         }
 
         /* עיצוב אזור הנגן הנוכחי */
         .now-playing {
-            background: #fffcf7; /* רקע לבן-שמנת נקי לנגן */
+            background: #fffcf7;
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 30px;
-            border: 2px solid #800020; /* מסגרת בורדו בולטת */
+            border: 2px solid #800020;
         }
 
         .now-playing h2 {
@@ -61,7 +84,7 @@
             margin-top: 15px;
         }
 
-        /* עיצוב רשימת הפרקים הקודמים */
+        /* עיצוב רשימת הפרקים */
         .playlist {
             text-align: right;
         }
@@ -88,7 +111,7 @@
         }
 
         .track-item:hover {
-            background: #f5efe2; /* השחרה קלה של השמנת במעבר עכבר */
+            background: #f5efe2;
             border-color: #800020;
         }
 
@@ -98,12 +121,30 @@
             color: #4a0e17;
         }
 
+        .track-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
         .track-date {
             font-size: 12px;
             color: #8a766a;
         }
 
-        /* כפתור הפעלה מהיר ברשימה - בורדו עם טקסט שמנת */
+        /* עיצוב התגית ה קטנה "האזנת" */
+        .listened-tag {
+            font-size: 11px;
+            color: #2e7d32; /* ירוק עדין */
+            background-color: #e8f5e9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: none; /* מוסתר כברירת מחדל ויוצג רק אם האזינו */
+        }
+
+        /* כפתור הפעלה */
         .play-btn {
             background: #800020;
             color: #fdfbf7;
@@ -117,34 +158,38 @@
         }
 
         .play-btn:hover {
-            background: #4a0e17; /* בורדו כהה יותר בזמן לחיצה */
+            background: #4a0e17;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>הרדיו האישי שלי</h1>
-        <div class="subtitle">רדיושיר</div>
+        
+        <div class="logo-container">
+            <div class="logo-placeholder" id="logo-place">מקום ללוגו שלך</div>
+            </div>
 
-        <!-- הנגן הראשי של הפרק האחרון -->
+        <div class="subtitle">תוכנית שמע חדשה כל 3 ימים לדרך ולנסיעות</div>
+
         <div class="now-playing">
-            <h2 id="current-title">מתנגן כעת: פרק 1 - תוכנית בכורה</h2>
+            <h2 id="current-title">מתנגן כעת: פרק 1</h2>
             <audio id="audio-player" controls>
                 <source id="audio-source" src="episode1.mp3" type="audio/mpeg">
                 הדפדפן שלך אינו תומך בנגן שמע.
             </audio>
         </div>
 
-        <!-- ארכיון הפרקים הקודמים -->
         <div class="playlist">
-            <h3>פרקים קודמים בארכיון:</h3>
+            <h3>פרקים נוספים:</h3>
             
-            <!-- פרק 1 -->
-            <div class="track-item" onclick="changeTrack('episode1.mp3', 'פרק 1 - תוכנית בכורה')">
+            <div class="track-item" id="track-episode1" onclick="changeTrack('episode1.mp3', 'פרק 1')">
                 <div>
-                    <div class="track-title">פרק 1 - תוכנית בכורה</div>
-                    <div class="track-date">הועלה לפני 3 ימים</div>
+                    <div class="track-title">פרק 1</div>
+                    <div class="track-info">
+                        <span class="track-date">הועלה היום</span>
+                        <span class="listened-tag" id="tag-episode1">האזנת</span>
+                    </div>
                 </div>
                 <button class="play-btn">נגן</button>
             </div>
@@ -153,6 +198,7 @@
     </div>
 
     <script>
+        // פונקציה שמפעילה את השיר ומסמנת שהמשתמש האזין לו
         function changeTrack(fileSrc, title) {
             const player = document.getElementById('audio-player');
             const source = document.getElementById('audio-source');
@@ -162,7 +208,40 @@
             titleElement.innerText = "מתנגן כעת: " + title;
             player.load();
             player.play();
+
+            // שמירת המידע שהמשתמש האזין לפרק זה (לפי שם הקובץ)
+            markAsListened(fileSrc);
         }
+
+        function markAsListened(fileSrc) {
+            // שומר בדפדפן המקומי שהפרק הופעל
+            localStorage.setItem('listened-' + fileSrc, 'true');
+            
+            // מציג מיד את התגית "האזנת" על המסך
+            const cleanId = fileSrc.replace('.mp3', '');
+            const tag = document.getElementById('tag-' + cleanId);
+            if (tag) {
+                tag.style.display = 'inline-block';
+            }
+        }
+
+        // פונקציה שרצה אוטומטית כשהאתר נפתח ובודקת למה המשתמש כבר האזין בעבר
+        function checkHistory() {
+            const tracks = ['episode1.mp3']; // כאן בעתיד תוסיפי את קבצי הפרקים הבאים
+            
+            tracks.forEach(track => {
+                if (localStorage.getItem('listened-' + track) === 'true') {
+                    const cleanId = track.replace('.mp3', '');
+                    const tag = document.getElementById('tag-' + cleanId);
+                    if (tag) {
+                        tag.style.display = 'inline-block';
+                    }
+                }
+            });
+        }
+
+        // הפעלת הבדיקה מיד עם טעינת הדף
+        window.onload = checkHistory;
     </script>
 
 </body>
