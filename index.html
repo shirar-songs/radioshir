@@ -175,7 +175,7 @@
             <h2 id="current-title">מתנגן כעת: פרק 1</h2>
             
             <audio id="audio-player" controls preload="auto">
-                <source id="audio-source" src="./episode1.mp3" type="audio/mpeg">
+                <source id="audio-source" src="https://docs.google.com/uc?export=download&id=1cxid22jFkAsHGNMeqNBs27aCCoVKZZu6" type="audio/mpeg">
                 הדפדפן שלך אינו תומך בנגן שמע.
             </audio>
 
@@ -185,7 +185,7 @@
         <div class="playlist">
             <h3>פרקים נוספים:</h3>
             
-            <div class="track-item" id="track-episode1" onclick="changeTrack('./episode1.mp3', 'פרק 1')">
+            <div class="track-item" id="track-episode1" onclick="changeTrack('https://docs.google.com/uc?export=download&id=1cxid22jFkAsHGNMeqNBs27aCCoVKZZu6', 'פרק 1')">
                 <div>
                     <div class="track-title">פרק 1</div>
                     <div class="track-info">
@@ -203,54 +203,41 @@
         const player = document.getElementById('audio-player');
         const debugStatus = document.getElementById('debug-status');
 
-        // מנגנון בדיקה שמקשיב לשגיאות של הנגן בזמן אמת
         player.addEventListener('error', function(e) {
             debugStatus.style.display = 'block';
-            if (player.error.code === 4) {
-                debugStatus.innerText = "❌ שגיאה: הדפדפן לא מוצא את קובץ האודיו בשרת. ודאי ששם הקובץ בגיטהאב הוא בדיוק episode1.mp3 (באותיות קטנות).";
-            } else {
-                debugStatus.innerText = "❌ שגיאה בטעינת הקובץ. קוד שגיאה: " + player.error.code;
-            }
+            debugStatus.innerText = "❌ שגיאה בטעינת הקובץ. ודאי שהקובץ בגוגל דרייב מוגדר כציבורי ('כל מי שקיבל את הקישור').";
         });
 
-        // החלפת רצועה
         function changeTrack(fileSrc, title) {
             const source = document.getElementById('audio-source');
             const titleElement = document.getElementById('current-title');
 
-            debugStatus.style.display = 'none'; // איפוס הודעת שגיאה קודמת
+            debugStatus.style.display = 'none'; 
             source.src = fileSrc;
             titleElement.innerText = "מתנגן כעת: " + title;
             player.load();
-            
-            // מנסה לנגן ותופס שגיאות חסמות
             player.play().catch(err => {
-                console.log("Play interrupted or failed:", err);
+                console.log("Play failed:", err);
             });
 
             markAsListened(fileSrc);
         }
 
         function markAsListened(fileSrc) {
-            localStorage.setItem('listened-' + fileSrc, 'true');
-            const cleanId = fileSrc.replace('./', '').replace('.mp3', '');
-            const tag = document.getElementById('tag-' + cleanId);
+            localStorage.setItem('listened-episode1', 'true');
+            const tag = document.getElementById('tag-episode1');
             if (tag) {
                 tag.style.display = 'inline-block';
             }
         }
 
         function checkHistory() {
-            const tracks = ['./episode1.mp3'];
-            tracks.forEach(track => {
-                if (localStorage.getItem('listened-' + track) === 'true') {
-                    const cleanId = track.replace('./', '').replace('.mp3', '');
-                    const tag = document.getElementById('tag-' + cleanId);
-                    if (tag) {
-                        tag.style.display = 'inline-block';
-                    }
+            if (localStorage.getItem('listened-episode1') === 'true') {
+                const tag = document.getElementById('tag-episode1');
+                if (tag) {
+                    tag.style.display = 'inline-block';
                 }
-            });
+            }
         }
 
         window.onload = checkHistory;
