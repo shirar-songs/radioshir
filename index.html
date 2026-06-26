@@ -29,32 +29,22 @@
             border: 1px solid #eadecc;
         }
 
-        /* מיקום הלוגו שלך */
+        /* מיקום ועיצוב הלוגו הגדול */
         .logo-container {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .logo-placeholder {
-            width: 150px;
-            height: 150px;
-            background-color: #eadecc;
-            border: 2px dashed #800020;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #800020;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .subtitle {
-            color: #6b5b52;
-            font-size: 14px;
             margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo-image {
+            width: 100%;
+            max-width: 320px; /* גודל מותאם ללוגו המלא */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(74, 14, 23, 0.05);
+            object-fit: contain;
         }
 
         /* עיצוב אזור הנגן המוטמע של גוגל */
@@ -165,12 +155,12 @@
 
     <div class="container">
         
+        <!-- הלוגו הציורי שלך -->
         <div class="logo-container">
-            <div class="logo-placeholder">מקום ללוגו שלך</div>
+            <img src="logo.jpg" alt="רדיו שיר לוגו" class="logo-image">
         </div>
 
-        <div class="subtitle">תוכנית שמע חדשה כל 3 ימים לדרך ולנסיעות</div>
-
+        <!-- הנגן המרכזי -->
         <div class="now-playing">
             <h2 id="current-title">מתנגן כעת: פרק 1</h2>
             
@@ -179,6 +169,7 @@
             </div>
         </div>
 
+        <!-- רשימת הפרקים -->
         <div class="playlist">
             <h3>פרקים נוספים:</h3>
             
@@ -201,7 +192,6 @@
             const player = document.getElementById('drive-player');
             const titleElement = document.getElementById('current-title');
 
-            // עדכון הנגן של גוגל לפרק הנבחר
             player.src = "https://drive.google.com/file/d/" + driveId + "/preview";
             titleElement.innerText = "מתנגן כעת: " + title;
 
