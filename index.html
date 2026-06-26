@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>רדיושיר</title>
+    <style>
+        /* עיצוב כללי של הדף - גווני שמנת ובורדו */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fdfbf7; /* גוון שמנת בהיר וחם לרקע */
+            color: #4a0e17; /* טקסט בורדו כהה מאוד לקריאות מקסימלית */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            background: #f7f3e9; /* שמנת מעט כהה יותר לקופסה המרכזית */
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(74, 14, 23, 0.1); /* צל עדין בגוון בורדו מוחלש */
+            margin-top: 20px;
+            border: 1px solid #eadecc;
+        }
+
+        h1 {
+            color: #800020; /* צבע בורדו קלאסי עמוק */
+            font-size: 26px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #6b5b52; /* צבע חום-אפרפר עדין שמשתלב מעולה עם שמנת */
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        /* עיצוב אזור הנגן הנוכחי */
+        .now-playing {
+            background: #fffcf7; /* רקע לבן-שמנת נקי לנגן */
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 2px solid #800020; /* מסגרת בורדו בולטת */
+        }
+
+        .now-playing h2 {
+            font-size: 18px;
+            margin-top: 0;
+            color: #800020;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        /* עיצוב רשימת הפרקים הקודמים */
+        .playlist {
+            text-align: right;
+        }
+
+        .playlist h3 {
+            font-size: 16px;
+            color: #800020;
+            border-bottom: 2px solid #800020;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        .track-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fffcf7;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border: 1px solid #eadecc;
+            transition: all 0.2s;
+        }
+
+        .track-item:hover {
+            background: #f5efe2; /* השחרה קלה של השמנת במעבר עכבר */
+            border-color: #800020;
+        }
+
+        .track-title {
+            font-weight: bold;
+            font-size: 15px;
+            color: #4a0e17;
+        }
+
+        .track-date {
+            font-size: 12px;
+            color: #8a766a;
+        }
+
+        /* כפתור הפעלה מהיר ברשימה - בורדו עם טקסט שמנת */
+        .play-btn {
+            background: #800020;
+            color: #fdfbf7;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .play-btn:hover {
+            background: #4a0e17; /* בורדו כהה יותר בזמן לחיצה */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>הרדיו האישי שלי</h1>
+        <div class="subtitle">רדיושיר</div>
+
+        <!-- הנגן הראשי של הפרק האחרון -->
+        <div class="now-playing">
+            <h2 id="current-title">מתנגן כעת: פרק 1 - תוכנית בכורה</h2>
+            <audio id="audio-player" controls>
+                <source id="audio-source" src="episode1.mp3" type="audio/mpeg">
+                הדפדפן שלך אינו תומך בנגן שמע.
+            </audio>
+        </div>
+
+        <!-- ארכיון הפרקים הקודמים -->
+        <div class="playlist">
+            <h3>פרקים קודמים בארכיון:</h3>
+            
+            <!-- פרק 1 -->
+            <div class="track-item" onclick="changeTrack('episode1.mp3', 'פרק 1 - תוכנית בכורה')">
+                <div>
+                    <div class="track-title">פרק 1 - תוכנית בכורה</div>
+                    <div class="track-date">הועלה לפני 3 ימים</div>
+                </div>
+                <button class="play-btn">נגן</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function changeTrack(fileSrc, title) {
+            const player = document.getElementById('audio-player');
+            const source = document.getElementById('audio-source');
+            const titleElement = document.getElementById('current-title');
+
+            source.src = fileSrc;
+            titleElement.innerText = "מתנגן כעת: " + title;
+            player.load();
+            player.play();
+        }
+    </script>
+
+</body>
+</html>
