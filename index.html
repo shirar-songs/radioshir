@@ -5,55 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>הרדיו שלי</title>
     <style>
-        /* עיצוב כללי של הדף - גווני שמנת ובורדו */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fdfbf7; 
-            color: #4a0e17; 
+        /* ביטול שוליים לבנים והשתלטות צבע השמנת על כל המסך */
+        html, body {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            width: 100%;
+            min-height: 100vh;
+            background-color: #fdfbf7; /* גוון השמנת המרכזי של האתר */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
+        /* אזור הלוגו העליון שמתפרש על כל הרוחב ונמס לתוך הרקע */
+        .header-bg {
+            width: 100%;
+            max-width: 600px; /* רוחב מקסימלי כדי שלא יימתח מדי במחשב */
+            position: relative;
+            line-height: 0;
+        }
+
+        .header-bg img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* אפקט ה"המססה" - מסכה שיוצרת מעבר מטושטש וחלק מתחתית הלוגו אל השמנת */
+        .header-bg::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px; /* גובה אזור הטשטוש והמעבר */
+            background: linear-gradient(to bottom, rgba(253, 251, 247, 0) 0%, #fdfbf7 100%);
+        }
+
+        /* מיכל התוכן הראשי (הנגן והרשימה) יושב עכשיו ישירות על רקע המסך */
         .container {
             max-width: 500px;
-            width: 100%;
+            width: 90%;
             text-align: center;
-            background: #f7f3e9; 
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(74, 14, 23, 0.1);
-            margin-top: 20px;
-            border: 1px solid #eadecc;
+            margin-top: -10px; /* מקרב את הנגן אל תוך אזור הלוגו הנמס */
+            z-index: 2;
+            padding-bottom: 40px;
         }
 
-        /* מיקום ועיצוב הלוגו הגדול */
-        .logo-container {
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        .logo-image {
-            width: 100%;
-            max-width: 320px; /* גודל מותאם ללוגו המלא */
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(74, 14, 23, 0.05);
-            object-fit: contain;
-        }
-
-        /* עיצוב אזור הנגן המוטמע של גוגל */
+        /* עיצוב אזור הנגן המרכזי */
         .now-playing {
             background: #fffcf7;
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 30px;
             border: 2px solid #800020;
+            box-shadow: 0 4px 15px rgba(74, 14, 23, 0.05);
         }
 
         .now-playing h2 {
@@ -104,6 +111,7 @@
             cursor: pointer;
             border: 1px solid #eadecc;
             transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
 
         .track-item:hover {
@@ -153,14 +161,12 @@
 </head>
 <body>
 
+    <div class="header-bg">
+        <img src="logo.jpg" alt="רדיו שיר לוגו">
+    </div>
+
     <div class="container">
         
-        <!-- הלוגו הציורי שלך -->
-        <div class="logo-container">
-            <img src="logo.jpg" alt="רדיו שיר לוגו" class="logo-image">
-        </div>
-
-        <!-- הנגן המרכזי -->
         <div class="now-playing">
             <h2 id="current-title">מתנגן כעת: פרק 1</h2>
             
@@ -169,7 +175,6 @@
             </div>
         </div>
 
-        <!-- רשימת הפרקים -->
         <div class="playlist">
             <h3>פרקים נוספים:</h3>
             
