@@ -11,7 +11,7 @@
             padding: 0;
             width: 100%;
             min-height: 100vh;
-            background-color: #fdfbf7; /* גוון השמנת המרכזי של האתר */
+            background-color: #fdfbf7; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
@@ -21,7 +21,7 @@
         /* אזור הלוגו העליון שמתפרש על כל הרוחב ונמס לתוך הרקע */
         .header-bg {
             width: 100%;
-            max-width: 600px; /* רוחב מקסימלי כדי שלא יימתח מדי במחשב */
+            max-width: 600px; 
             position: relative;
             line-height: 0;
         }
@@ -32,23 +32,22 @@
             display: block;
         }
 
-        /* אפקט ה"המססה" - מסכה שיוצרת מעבר מטושטש וחלק מתחתית הלוגו אל השמנת */
         .header-bg::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 60px; /* גובה אזור הטשטוש והמעבר */
+            height: 60px; 
             background: linear-gradient(to bottom, rgba(253, 251, 247, 0) 0%, #fdfbf7 100%);
         }
 
-        /* מיכל התוכן הראשי (הנגן והרשימה) יושב עכשיו ישירות על רקע המסך */
+        /* מיכל התוכן הראשי */
         .container {
             max-width: 500px;
             width: 90%;
             text-align: center;
-            margin-top: -10px; /* מקרב את הנגן אל תוך אזור הלוגו הנמס */
+            margin-top: -10px; 
             z-index: 2;
             padding-bottom: 40px;
         }
@@ -70,7 +69,6 @@
             margin-bottom: 15px;
         }
 
-        /* מסגרת הנגן של גוגל דרייב */
         .drive-player-container {
             position: relative;
             width: 100%;
@@ -168,22 +166,33 @@
     <div class="container">
         
         <div class="now-playing">
-            <h2 id="current-title">מתנגן כעת: פרק 1</h2>
+            <h2 id="current-title">טוען את הפרק האחרון...</h2>
             
             <div class="drive-player-container">
-                <iframe id="drive-player" src="https://drive.google.com/file/d/1cxid22jFkAsHGNMeqNBs27aCCoVKZZu6/preview"></iframe>
+                <iframe id="drive-player" src=""></iframe>
             </div>
         </div>
 
-        <div class="playlist">
+        <div class="playlist" id="playlist-container">
             <h3>פרקים נוספים:</h3>
             
-            <div class="track-item" id="track-episode1" onclick="changeTrack('1cxid22jFkAsHGNMeqNBs27aCCoVKZZu6', 'פרק 1')">
+            <div class="track-item" data-id="17R9l566A0xpfwHqQOL7WiYpAFUeVFdnM" data-title="פרק 2" onclick="clickTrack(this)">
+                <div>
+                    <div class="track-title">פרק 2</div>
+                    <div class="track-info">
+                        <span class="track-date">הועלה היום</span>
+                        <span class="listened-tag">האזנת</span>
+                    </div>
+                </div>
+                <button class="play-btn">נגן</button>
+            </div>
+
+            <div class="track-item" data-id="1cxid22jFkAsHGNMeqNBs27aCCoVKZZu6" data-title="פרק 1" onclick="clickTrack(this)">
                 <div>
                     <div class="track-title">פרק 1</div>
                     <div class="track-info">
-                        <span class="track-date">הועלה היום</span>
-                        <span class="listened-tag" id="tag-episode1">האזנת</span>
+                        <span class="track-date">לפני מספר ימים</span>
+                        <span class="listened-tag">האזנת</span>
                     </div>
                 </div>
                 <button class="play-btn">נגן</button>
@@ -193,34 +202,46 @@
     </div>
 
     <script>
-        function changeTrack(driveId, title) {
+        // פונקציה לטעינת פרק לנגן
+        function loadTrack(driveId, title) {
             const player = document.getElementById('drive-player');
             const titleElement = document.getElementById('current-title');
 
             player.src = "https://drive.google.com/file/d/" + driveId + "/preview";
             titleElement.innerText = "מתנגן כעת: " + title;
-
-            markAsListened();
         }
 
-        function markAsListened() {
-            localStorage.setItem('listened-episode1', 'true');
-            const tag = document.getElementById('tag-episode1');
-            if (tag) {
-                tag.style.display = 'inline-block';
-            }
+        // פונקציה שמופעלת בלחיצה ידנית של משתמש
+        function clickTrack(element) {
+            const driveId = element.getAttribute('data-id');
+            const title = element.getAttribute('data-title');
+            
+            loadTrack(driveId, title);
+            
+            // שמירה בהיסטוריה שהאזינו לפרק הזה
+            localStorage.setItem('listened-' + title, 'true');
+            element.querySelector('.listened-tag').style.style.display = 'inline-block';
         }
 
-        function checkHistory() {
-            if (localStorage.getItem('listened-episode1') === 'true') {
-                const tag = document.getElementById('tag-episode1');
-                if (tag) {
-                    tag.style.display = 'inline-block';
+        // פונקציה שרצה אוטומטית כשהאתר נפתח
+        window.onload = function() {
+            // 1. בדיקת היסטוריית האזנות ומילוי התגיות הירוקות
+            const tracks = document.querySelectorAll('.track-item');
+            tracks.forEach(track => {
+                const title = track.getAttribute('data-title');
+                if (localStorage.getItem('listened-' + title) === 'true') {
+                    track.querySelector('.listened-tag').style.display = 'inline-block';
                 }
-            }
-        }
+            });
 
-        window.onload = checkHistory;
+            // 2. אוטומציה: לקיחת הפרק הראשון ברשימה וטעינתו לנגן הראשי
+            const firstTrack = document.querySelector('.track-item');
+            if (firstTrack) {
+                const firstId = firstTrack.getAttribute('data-id');
+                const firstTitle = firstTrack.getAttribute('data-title');
+                loadTrack(firstId, firstTitle);
+            }
+        };
     </script>
 
 </body>
