@@ -176,33 +176,33 @@
         <div class="playlist" id="playlist-container">
             <h3>פרקים נוספים:</h3>
             
-            <div class="track-item" data-id="1Q9jhmXlZSUFJfS1Oezrd-m41mbujpLfd" data-title="פרק 3" onclick="clickTrack(this)">
+            <div class="track-item" data-id="1Q9jhmXlZSUFJfS1Oezrd-m41mbujpLfd" data-title="פרק 3" data-date="2026-06-30" onclick="clickTrack(this)">
                 <div>
                     <div class="track-title">פרק 3</div>
                     <div class="track-info">
-                        <span class="track-date">הועלה היום</span>
+                        <span class="track-date">מחשב זמן...</span>
                         <span class="listened-tag">האזנת</span>
                     </div>
                 </div>
                 <button class="play-btn">נגן</button>
             </div>
 
-            <div class="track-item" data-id="17R9l566A0xpfwHqQOL7WiYpAFUeVFdnM" data-title="פרק 2" onclick="clickTrack(this)">
+            <div class="track-item" data-id="17R9l566A0xpfwHqQOL7WiYpAFUeVFdnM" data-title="פרק 2" data-date="2026-06-25" onclick="clickTrack(this)">
                 <div>
                     <div class="track-title">פרק 2</div>
                     <div class="track-info">
-                        <span class="track-date">לפני מספר ימים</span>
+                        <span class="track-date">מחשב זמן...</span>
                         <span class="listened-tag">האזנת</span>
                     </div>
                 </div>
                 <button class="play-btn">נגן</button>
             </div>
 
-            <div class="track-item" data-id="1cxid22jFkAsHGNMeqNBs27aCCoVKZZu6" data-title="פרק 1" onclick="clickTrack(this)">
+            <div class="track-item" data-id="1cxid22jFkAsHGNMeqNBs27aCCoVKZZu6" data-title="פרק 1" data-date="2026-05-15" onclick="clickTrack(this)">
                 <div>
                     <div class="track-title">פרק 1</div>
                     <div class="track-info">
-                        <span class="track-date">לפני מספר ימים</span>
+                        <span class="track-date">מחשב זמן...</span>
                         <span class="listened-tag">האזנת</span>
                     </div>
                 </div>
@@ -213,6 +213,43 @@
     </div>
 
     <script>
+        // פונקציה חכמה לחישוב הזמן שעבר מאז העלאת הפרק
+        function updateTrackDates() {
+            const tracks = document.querySelectorAll('.track-item');
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+            tracks.forEach(track => {
+                const dateStr = track.getAttribute('data-date');
+                if (!dateStr) return;
+
+                const parts = dateStr.split('-');
+                const uploadDate = new Date(parts[0], parts[1] - 1, parts[2]);
+
+                const timeDiff = today.getTime() - uploadDate.getTime();
+                const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+                let statusText = "";
+
+                if (daysDiff <= 0) {
+                    statusText = "הועלה היום";
+                } else if (daysDiff === 1) {
+                    statusText = "הועלה אתמול";
+                } else if (daysDiff <= 14) {
+                    statusText = "הועלה לפני " + daysDiff + " ימים";
+                } else {
+                    const monthsDiff = Math.floor(daysDiff / 30);
+                    if (monthsDiff <= 1) {
+                        statusText = "הועלה לפני חודש";
+                    } else {
+                        statusText = "הועלה לפני " + monthsDiff + " חודשים";
+                    }
+                }
+
+                track.querySelector('.track-date').innerText = statusText;
+            });
+        }
+
         // פונקציה לטעינת פרק לנגן
         function loadTrack(driveId, title) {
             const player = document.getElementById('drive-player');
@@ -236,7 +273,10 @@
 
         // פונקציה שרצה אוטומטית כשהאתר נפתח
         window.onload = function() {
-            // 1. בדיקת היסטוריית האזנות ומילוי התגיות הירוקות
+            // 1. חישוב והצגת התאריכים החכמים
+            updateTrackDates();
+
+            // 2. בדיקת היסטוריית האזנות ומילוי התגיות הירוקות
             const tracks = document.querySelectorAll('.track-item');
             tracks.forEach(track => {
                 const title = track.getAttribute('data-title');
@@ -245,7 +285,7 @@
                 }
             });
 
-            // 2. אוטומציה: לקיחת הפרק הראשון ברשימה וטעינתו לנגן הראשי
+            // 3. אוטומציה: לקיחת הפרק הראשון ברשימה וטעינתו לנגן הראשי
             const firstTrack = document.querySelector('.track-item');
             if (firstTrack) {
                 const firstId = firstTrack.getAttribute('data-id');
