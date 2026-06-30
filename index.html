@@ -187,7 +187,7 @@
                 <button class="play-btn">נגן</button>
             </div>
 
-            <div class="track-item" data-id="17R9l566A0xpfwHqQOL7WiYpAFUeVFdnM" data-title="פרק 2" data-date="2026-06-25" onclick="clickTrack(this)">
+            <div class="track-item" data-id="17R9l566A0xpfwHqQOL7WiYpAFUeVFdnM" data-title="פרק 2" data-date="2026-06-27" onclick="clickTrack(this)">
                 <div>
                     <div class="track-title">פרק 2</div>
                     <div class="track-info">
@@ -198,7 +198,7 @@
                 <button class="play-btn">נגן</button>
             </div>
 
-            <div class="track-item" data-id="1cxid22jFkAsHGNMeqNBs27aCCoVKZZu6" data-title="פרק 1" data-date="2026-05-15" onclick="clickTrack(this)">
+            <div class="track-item" data-id="1cxid22jFkAsHGNMeqNBs27aCCoVKZZu6" data-title="פרק 1" data-date="2026-06-23" onclick="clickTrack(this)">
                 <div>
                     <div class="track-title">פרק 1</div>
                     <div class="track-info">
@@ -213,10 +213,11 @@
     </div>
 
     <script>
-        // פונקציה חכמה לחישוב הזמן שעבר מאז העלאת הפרק
+        // פונקציה שמחשבת את הזמן שעבר מהיום הנוכחי באופן דינמי
         function updateTrackDates() {
             const tracks = document.querySelectorAll('.track-item');
             const now = new Date();
+            // הגדרת תאריך היום ללא שעות כדי שהחישוב יתבצע לפי ימים נטו
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
             tracks.forEach(track => {
@@ -273,7 +274,7 @@
 
         // פונקציה שרצה אוטומטית כשהאתר נפתח
         window.onload = function() {
-            // 1. חישוב והצגת התאריכים החכמים
+            // 1. חישוב והצגת התאריכים החכמים על בסיס היום הנוכחי
             updateTrackDates();
 
             // 2. בדיקת היסטוריית האזנות ומילוי התגיות הירוקות
