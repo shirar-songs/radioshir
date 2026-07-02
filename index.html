@@ -45,7 +45,7 @@
         /* מיכל התוכן הראשי */
         .container {
             max-width: 500px;
-            width: 90%;
+            width: 92%; 
             text-align: center;
             margin-top: -10px; 
             z-index: 2;
@@ -55,7 +55,7 @@
         /* עיצוב אזור הנגן המרכזי */
         .now-playing {
             background: #fffcf7;
-            padding: 20px;
+            padding: 20px 15px; 
             border-radius: 12px;
             margin-bottom: 30px;
             border: 2px solid #800020;
@@ -69,20 +69,18 @@
             margin-bottom: 15px;
         }
 
-        .drive-player-container {
-            position: relative;
+        /* מיכל הנגן הנקי - מכיל רק כפתור פליי מובנה */
+        .audio-player-container {
             width: 100%;
-            height: 60px;
-            border-radius: 30px;
-            overflow: hidden;
-            border: 1px solid #eadecc;
-            background: #f1f3f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0;
         }
 
-        iframe {
+        audio {
             width: 100%;
-            height: 100%;
-            border: none;
+            max-width: 400px;
         }
 
         /* עיצוב רשימת הפרקים */
@@ -168,13 +166,14 @@
         <div class="now-playing">
             <h2 id="current-title">טוען את הפרק האחרון...</h2>
             
-            <div class="drive-player-container">
-                <iframe id="drive-player" src=""></iframe>
+            <div class="audio-player-container">
+                <audio id="audio-player" controls allow="autoplay"></audio>
             </div>
         </div>
 
         <div class="playlist" id="playlist-container">
             <h3>פרקים נוספים:</h3>
+            
             <div class="track-item" data-id="1WutDUMIWzXUVzWbL_N1nyfGbvC2XB5kM" data-title="פרק 4" data-date="2026-07-02" onclick="clickTrack(this)">
                 <div>
                     <div class="track-title">פרק 4</div>
@@ -185,6 +184,7 @@
                 </div>
                 <button class="play-btn">נגן</button>
             </div>
+
             <div class="track-item" data-id="1Q9jhmXlZSUFJfS1Oezrd-m41mbujpLfd" data-title="פרק 3" data-date="2026-06-30" onclick="clickTrack(this)">
                 <div>
                     <div class="track-title">פרק 3</div>
@@ -222,11 +222,9 @@
     </div>
 
     <script>
-        // פונקציה שמחשבת את הזמן שעבר מהיום הנוכחי באופן דינמי
         function updateTrackDates() {
             const tracks = document.querySelectorAll('.track-item');
             const now = new Date();
-            // הגדרת תאריך היום ללא שעות כדי שהחישוב יתבצע לפי ימים נטו
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
             tracks.forEach(track => {
@@ -260,33 +258,32 @@
             });
         }
 
-        // פונקציה לטעינת פרק לנגן
+        // פונקציה לטעינת קובץ האודיו ישירות לנגן הדפדפן הנקי
         function loadTrack(driveId, title) {
-            const player = document.getElementById('drive-player');
+            const player = document.getElementById('audio-player');
             const titleElement = document.getElementById('current-title');
 
-            player.src = "https://drive.google.com/file/d/" + driveId + "/preview";
+            // שימוש בקישור ישיר להזרמת האודיו נטו ללא ממשק גוגל
+            player.src = "https://docs.google.com/uc?export=download&id=" + driveId;
             titleElement.innerText = "מתנגן כעת: " + title;
         }
 
-        // פונקציה שמופעלת בלחיצה ידנית של משתמש
         function clickTrack(element) {
             const driveId = element.getAttribute('data-id');
             const title = element.getAttribute('data-title');
             
             loadTrack(driveId, title);
             
-            // שמירה בהיסטוריה שהאזינו לפרק הזה
+            // אוטומציה להפעלת השיר מיד בלחיצה
+            document.getElementById('audio-player').play();
+            
             localStorage.setItem('listened-' + title, 'true');
             element.querySelector('.listened-tag').style.display = 'inline-block';
         }
 
-        // פונקציה שרצה אוטומטית כשהאתר נפתח
         window.onload = function() {
-            // 1. חישוב והצגת התאריכים החכמים על בסיס היום הנוכחי
             updateTrackDates();
 
-            // 2. בדיקת היסטוריית האזנות ומילוי התגיות הירוקות
             const tracks = document.querySelectorAll('.track-item');
             tracks.forEach(track => {
                 const title = track.getAttribute('data-title');
@@ -295,7 +292,6 @@
                 }
             });
 
-            // 3. אוטומציה: לקיחת הפרק הראשון ברשימה וטעינתו לנגן הראשי
             const firstTrack = document.querySelector('.track-item');
             if (firstTrack) {
                 const firstId = firstTrack.getAttribute('data-id');
