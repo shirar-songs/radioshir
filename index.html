@@ -5,95 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>הרדיו שלי</title>
     <style>
-        /* ביטול שוליים לבנים והשתלטות צבע השמנת על כל המסך */
+        /* הגדרת תמונת הלוגו כרקע קבוע שמשתלט על כל המסך בצורה חלקה */
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             min-height: 100vh;
-            background-color: #fdfbf7; 
+            background-image: url('logo.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* שומר על הרקע יציב כשיורדים בפרקים */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* אזור הלוגו העליון שמתפרש על כל הרוחב ונמס לתוך הרקע */
-        .header-bg {
+        /* מרווח עליון בלבד כדי לתת כבוד לחלק העליון של התמונה (איפה שהכיתוב "רדיו שיר") */
+        .header-spacer {
             width: 100%;
-            max-width: 600px; 
-            position: relative;
-            line-height: 0;
-        }
-
-        .header-bg img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .header-bg::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 60px; 
-            background: linear-gradient(to bottom, rgba(253, 251, 247, 0) 0%, #fdfbf7 100%);
+            height: 220px; /* גובה משוער כדי שהטקסט והנגן לא יסתירו את הלוגו הראשי */
         }
 
         /* מיכל התוכן הראשי */
         .container {
-            max-width: 550px;
-            width: 95%; 
+            max-width: 500px;
+            width: 90%; 
             text-align: center;
-            margin-top: -10px; 
             z-index: 2;
             padding-bottom: 40px;
         }
 
-        /* עיצוב אזור הנגן המרכזי */
+        /* אזור הנגן המרכזי - נקי לחלוטין, צף ישירות על תמונת הרקע */
         .now-playing {
-            background: #fffcf7;
-            padding: 20px 15px; 
-            border-radius: 12px;
-            margin-bottom: 30px;
-            border: 2px solid #800020;
-            box-shadow: 0 4px 15px rgba(74, 14, 23, 0.05);
-            overflow: hidden;
+            background: transparent;
+            padding: 10px 0;
+            margin-bottom: 35px;
+            border: none;
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .now-playing h2 {
-            font-size: 18px;
+            font-size: 19px;
             margin-top: 0;
             color: #800020;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            font-weight: bold;
+            /* צל קליל לטקסט כדי שיבלוט בצורה מושלמת על גבי הנוף */
+            text-shadow: 1px 1px 2px rgba(253, 251, 247, 0.8);
         }
 
-        /* מיכל הנגן של גוגל דרייב */
+        /* מיכל הנגן של גוגל דרייב - ממורכז ויציב */
         .drive-player-container {
             position: relative;
             width: 100%;
+            max-width: 380px; 
             height: 62px; 
             border-radius: 31px;
             overflow: hidden;
             border: 1px solid #eadecc;
             background: #f1f3f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+            display: block;
         }
 
         /* עיצוב רשימת הפרקים */
         .playlist {
             text-align: right;
-            padding: 0 5px;
+            padding: 0 2px;
         }
 
         .playlist h3 {
@@ -102,24 +92,26 @@
             border-bottom: 2px solid #800020;
             padding-bottom: 8px;
             margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(253, 251, 247, 0.8);
         }
 
+        /* כרטיסיות הפרקים - עם רקע מעט שקוף כדי שיראו את הנוף מאחור בעדינות */
         .track-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #fffcf7;
+            background: rgba(255, 252, 247, 0.9); /* שקיפות עדינה למראה יוקרתי */
             padding: 12px 15px;
             border-radius: 8px;
             margin-bottom: 10px;
             cursor: pointer;
             border: 1px solid #eadecc;
             transition: all 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
 
         .track-item:hover {
-            background: #f5efe2;
+            background: rgba(245, 239, 226, 0.95);
             border-color: #800020;
         }
 
@@ -162,33 +154,20 @@
             cursor: pointer;
         }
 
-        /* פתרון אגרסיבי למסכים צרים של טלפונים ניידים */
-        @media (max-width: 480px) {
-            .container {
-                width: 100%; /* מריחה מלאה של התוכן מקצה לקצה */
-            }
-            .now-playing {
-                border-left: none;
-                border-right: none;
-                border-radius: 0; /* ביטול הקיעור בצדדים כדי להרוויח עוד פיקסלים */
-                padding: 20px 2px;
-            }
+        /* התאמות למסכים קטנים מאוד */
+        @media (max-width: 400px) {
             .drive-player-container {
-                width: 108%; /* מותח את גבולות המיכל החוצה */
-                left: -4%; /* מאזן את המתיחה למרכז המסך */
-                transform: scale(0.92); /* מקטין את הנגן והכפתורים בצורה אחידה כדי שלא יימחצו */
+                max-width: 100%;
             }
-            .playlist {
-                padding: 0 12px; /* שומר על מרחק יפה לרשימת השירים */
+            .header-spacer {
+                height: 180px; /* התאמת המרווח העליון לטלפונים קטנים */
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="header-bg">
-        <img src="logo.jpg" alt="רדיו שיר לוגו">
-    </div>
+    <div class="header-spacer"></div>
 
     <div class="container">
         
