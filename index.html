@@ -4,44 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>הרדיו שלי</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* הגדרת תמונת הלוגו כרקע קבוע שמשתלט על כל המסך בצורה חלקה */
+        /* ביטול שוליים והגדרת רקע שמנת קבוע לכל העמוד */
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             min-height: 100vh;
-            background-image: url('logo.jpg');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-attachment: fixed; /* שומר על הרקע יציב כשיורדים בפרקים */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fcf9f2; /* צבע שמנת בהיר וחם */
+            font-family: 'Assistant', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* מרווח עליון בלבד כדי לתת כבוד לחלק העליון של התמונה (איפה שהכיתוב "רדיו שיר") */
-        .header-spacer {
+        /* אזור הלוגו העליון - כעת עוטף את הנגן והכותרת */
+        .header-bg {
             width: 100%;
-            height: 220px; /* גובה משוער כדי שהטקסט והנגן לא יסתירו את הלוגו הראשי */
+            max-width: 600px; 
+            position: relative;
+            background-image: url('logo.jpg');
+            background-size: 100% auto;
+            background-position: center top;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 180px; /* משאיר מקום לגרפיקה העליונה של הלוגו */
         }
 
-        /* מיכל התוכן הראשי */
+        /* אפקט המיזוג החלק של התמונה אל תוך השמנת בתחתית אזור הלוגו */
+        .header-bg::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 90px; /* מעבר רך וארוך יותר למיזוג מושלם */
+            background: linear-gradient(to bottom, rgba(252, 249, 242, 0) 0%, #fcf9f2 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* מיכל התוכן הראשי שיושב בתוך הלוגו וממשיך מטה */
         .container {
-            max-width: 500px;
             width: 90%; 
+            max-width: 500px;
             text-align: center;
-            z-index: 2;
-            padding-bottom: 40px;
+            z-index: 2; /* מעל שכבת המיזוג של הרקע */
         }
 
-        /* אזור הנגן המרכזי - נקי לחלוטין, צף ישירות על תמונת הרקע */
+        /* אזור הנגן המרכזי - צף נקי על תמונת הלוגו */
         .now-playing {
             background: transparent;
             padding: 10px 0;
-            margin-bottom: 35px;
+            margin-bottom: 20px;
             border: none;
             box-shadow: none;
             display: flex;
@@ -51,16 +72,15 @@
         }
 
         .now-playing h2 {
-            font-size: 19px;
+            font-size: 20px;
             margin-top: 0;
             color: #800020;
-            margin-bottom: 18px;
-            font-weight: bold;
-            /* צל קליל לטקסט כדי שיבלוט בצורה מושלמת על גבי הנוף */
-            text-shadow: 1px 1px 2px rgba(253, 251, 247, 0.8);
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* מיכל הנגן של גוגל דרייב - ממורכז ויציב */
+        /* מיכל הנגן של גוגל דרייב - יציב וממורכז */
         .drive-player-container {
             position: relative;
             width: 100%;
@@ -70,7 +90,7 @@
             overflow: hidden;
             border: 1px solid #eadecc;
             background: #f1f3f4;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
 
         iframe {
@@ -80,44 +100,54 @@
             display: block;
         }
 
-        /* עיצוב רשימת הפרקים */
+        /* עיצוב רשימת הפרקים - יושבת בחוץ על רקע השמנת */
+        .playlist-wrapper {
+            width: 90%;
+            max-width: 500px;
+            z-index: 3;
+            padding-bottom: 40px;
+        }
+
         .playlist {
             text-align: right;
             padding: 0 2px;
         }
 
+        /* כותרת הפרקים הנוספים - עדיין תחת השפעת הלוגו והמיזוג */
         .playlist h3 {
-            font-size: 16px;
+            font-size: 18px;
             color: #800020;
             border-bottom: 2px solid #800020;
             padding-bottom: 8px;
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 2px rgba(253, 251, 247, 0.8);
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* כרטיסיות הפרקים - עם רקע מעט שקוף כדי שיראו את הנוף מאחור בעדינות */
+        /* כרטיסיות הפרקים - משתלבות עם השמנת */
         .track-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 252, 247, 0.9); /* שקיפות עדינה למראה יוקרתי */
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            background: #fffcf7;
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin-bottom: 12px;
             cursor: pointer;
-            border: 1px solid #eadecc;
+            border: 1px solid #ebdcc5;
             transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 6px rgba(128,0,32,0.02);
         }
 
         .track-item:hover {
-            background: rgba(245, 239, 226, 0.95);
+            background: #f5efe2;
             border-color: #800020;
         }
 
         .track-title {
-            font-weight: bold;
-            font-size: 15px;
+            font-weight: 700;
+            font-size: 16px;
             color: #4a0e17;
         }
 
@@ -125,11 +155,11 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-top: 4px;
+            margin-top: 5px;
         }
 
         .track-date {
-            font-size: 12px;
+            font-size: 13px;
             color: #8a766a;
         }
 
@@ -137,9 +167,9 @@
             font-size: 11px;
             color: #2e7d32; 
             background-color: #e8f5e9;
-            padding: 2px 6px;
+            padding: 2px 7px;
             border-radius: 4px;
-            font-weight: bold;
+            font-weight: 700;
             display: none; 
         }
 
@@ -147,40 +177,44 @@
             background: #800020;
             color: #fdfbf7;
             border: none;
-            padding: 6px 12px;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 13px;
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
             cursor: pointer;
+            font-family: 'Assistant', sans-serif;
         }
 
-        /* התאמות למסכים קטנים מאוד */
-        @media (max-width: 400px) {
-            .drive-player-container {
-                max-width: 100%;
+        /* התאמות למסכים קטנים בנייד */
+        @media (max-width: 450px) {
+            .header-bg {
+                padding-top: 140px; /* מנמיך מעט את הגובה בנייד להתאמה מושלמת */
             }
-            .header-spacer {
-                height: 180px; /* התאמת המרווח העליון לטלפונים קטנים */
+            .drive-player-container {
+                max-width: 96%;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="header-spacer"></div>
+    <div class="header-bg">
+        <div class="container">
+            <div class="now-playing">
+                <h2 id="current-title">טוען את הפרק האחרון...</h2>
+                <div class="drive-player-container">
+                    <iframe id="drive-player" src="" allow="autoplay"></iframe>
+                </div>
+            </div>
 
-    <div class="container">
-        
-        <div class="now-playing">
-            <h2 id="current-title">טוען את הפרק האחרון...</h2>
-            
-            <div class="drive-player-container">
-                <iframe id="drive-player" src="" allow="autoplay"></iframe>
+            <div class="playlist">
+                <h3>פרקים נוספים:</h3>
             </div>
         </div>
+    </div>
 
+    <div class="playlist-wrapper">
         <div class="playlist" id="playlist-container">
-            <h3>פרקים נוספים:</h3>
             
             <div class="track-item" data-id="1WutDUMIWzXUVzWbL_N1nyfGbvC2XB5kM" data-title="פרק 4" data-date="2026-07-02" onclick="clickTrack(this)">
                 <div>
