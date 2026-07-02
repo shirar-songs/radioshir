@@ -42,20 +42,20 @@
             background: linear-gradient(to bottom, rgba(253, 251, 247, 0) 0%, #fdfbf7 100%);
         }
 
-        /* מיכל התוכן הראשי - מורחב למקסימום כדי לתת לנגן רוחב בנייד */
+        /* מיכל התוכן הראשי - מורחב למקסימום */
         .container {
             max-width: 550px;
-            width: 95%; 
+            width: 96%; 
             text-align: center;
             margin-top: -10px; 
             z-index: 2;
             padding-bottom: 40px;
         }
 
-        /* עיצוב אזור הנגן המרכזי */
+        /* עיצוב אזור הנגן המרכזי - שונה כדי לתת מקסימום רוחב לנגן השחור */
         .now-playing {
             background: #fffcf7;
-            padding: 20px 10px; /* מינימום שוליים בצדדים כדי להרוויח רוחב נטו לנגן */
+            padding: 20px 4px; /* צמצום דרסטי של השוליים בצדדים כדי שהנגן יתרחב לחלוטין */
             border-radius: 12px;
             margin-bottom: 30px;
             border: 2px solid #800020;
@@ -69,7 +69,7 @@
             margin-bottom: 15px;
         }
 
-        /* מיכל הנגן של גוגל דרייב - תופס 100% רוחב ומרווח לחלוטין */
+        /* מיכל הנגן של גוגל דרייב - מתוח מקצה לקצה */
         .drive-player-container {
             position: relative;
             width: 100%;
@@ -156,6 +156,17 @@
             font-weight: bold;
             font-size: 13px;
             cursor: pointer;
+        }
+
+        /* התאמה אגרסיבית מיוחדת לרוחב מלא בטלפונים ניידים */
+        @media (max-width: 480px) {
+            .container {
+                width: 98%; /* מנצל את כל רוחב המסך הפיזי של הנייד */
+            }
+            .now-playing {
+                padding-left: 2px;
+                padding-right: 2px;
+            }
         }
     </style>
 </head>
@@ -262,7 +273,6 @@
             });
         }
 
-        // טעינת הנגן המקורי בפורמט preview הרחב
         function loadTrack(driveId, title) {
             const player = document.getElementById('drive-player');
             const titleElement = document.getElementById('current-title');
