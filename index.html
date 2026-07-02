@@ -4,20 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>הרדיו שלי</title>
+    <!-- טעינת הפונט המודרני Assistant מגוגל פונטס -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* הגדרת פונט ההנצחה המיוחד 'OH Tamir Adar' מתוך קבצי ה-Web שהעלית */
-        @font-face {
-            font-family: 'OHTamirAdar';
-            src: url('OHTamirAdar-Regular.woff2') format('woff2'),
-                 url('OHTamirAdar-Regular.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-
         /* ביטול שוליים והגדרת רקע שמנת קבוע לכל העמוד */
         html, body {
             margin: 0;
@@ -69,7 +61,7 @@
             flex-direction: column;
             align-items: center;
             box-sizing: border-box;
-            padding: 0 10px;
+            padding: 0 10px; /* מניעת הצמדה מוחלטת לקצוות המסך */
         }
 
         /* אזור הנגן המרכזי */
@@ -95,11 +87,11 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* מיכל הנגן של גוגל דרייב */
+        /* מיכל הנגן של גוגל דרייב - רוחב יציב ומרווח למניעת חפיפת כפתורים */
         .drive-player-container {
             position: relative;
             width: 100%;
-            max-width: 440px; 
+            max-width: 440px; /* הגדלה נוספת כדי להבטיח מרחב לכפתורי השמע וההרחבה */
             height: 62px; 
             border-radius: 31px;
             overflow: hidden;
@@ -189,18 +181,16 @@
             display: none; 
         }
 
-        /* כפתור נגן - משתמש בלעדית בפונט OHTamirAdar שהעלית */
         .play-btn {
             background: #800020;
             color: #fdfbf7;
             border: none;
-            padding: 6px 16px;
+            padding: 7px 14px;
             border-radius: 6px;
-            font-weight: normal;
-            font-size: 17px; /* הגדלה קלה של הגופן כדי שיהיה קריא ובולט כמו שצריך */
+            font-weight: 700;
+            font-size: 14px;
             cursor: pointer;
-            font-family: 'OHTamirAdar', sans-serif; /* הגדרת הפונט המיוחד */
-            line-height: 1;
+            font-family: 'Assistant', sans-serif;
         }
 
         /* התאמות מדויקות למסכים ומניעת עלייה של כפתורים זה על זה בנייד */
@@ -209,15 +199,17 @@
                 padding-top: 140px; 
             }
             .drive-player-container {
-                width: 100%; 
+                width: 100%; /* רוחב מלא וטבעי בלי כיווץ scale דיגיטלי */
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- אזור הלוגו שעוטף את הנגן והכותרת ומתמזג בסופו -->
     <div class="header-bg">
         <div class="container">
+            <!-- הנגן המרכזי המורחב והממורכז -->
             <div class="now-playing">
                 <h2 id="current-title">טוען את הפרק האחרון...</h2>
                 <div class="drive-player-container">
@@ -231,9 +223,11 @@
         </div>
     </div>
 
+    <!-- רשימת הפרקים שיושבת בחוץ ומתמזגת לתוך השמנת הבהיר -->
     <div class="playlist-wrapper">
         <div class="playlist" id="playlist-container">
             
+            <!-- פרק 4 -->
             <div class="track-item" data-id="1WutDUMIWzXUVzWbL_N1nyfGbvC2XB5kM" data-title="פרק 4" data-date="2026-07-02" onclick="clickTrack(this)">
                 <div>
                     <div class="track-title">פרק 4</div>
@@ -245,6 +239,7 @@
                 <button class="play-btn">נגן</button>
             </div>
 
+            <!-- פרק 3 -->
             <div class="track-item" data-id="1Q9jhmXlZSUFJfS1Oezrd-m41mbujpLfd" data-title="פרק 3" data-date="2026-06-30" onclick="clickTrack(this)">
                 <div>
                     <div class="track-title">פרק 3</div>
@@ -256,6 +251,7 @@
                 <button class="play-btn">נגן</button>
             </div>
 
+            <!-- פרק 2 -->
             <div class="track-item" data-id="17R9l566A0xpfwHqQOL7WiYpAFUeVFdnM" data-title="פרק 2" data-date="2026-06-27" onclick="clickTrack(this)">
                 <div>
                     <div class="track-title">פרק 2</div>
@@ -267,7 +263,8 @@
                 <button class="play-btn">נגן</button>
             </div>
 
-            <div class="track-item" data-id="1cxid22jFkAsHGNMeqNBs27aCCoVKZZu6" data-title="פרק 1" data-date="2026-06-23" onclick="clickTrack(this)">
+            <!-- פרק 1 -->
+            <div class="track-item" data-id="1cxid22jFkAsHGNMeqNBs27aCCoVKVKZZu6" data-title="פרק 1" data-date="2026-06-23" onclick="clickTrack(this)">
                 <div>
                     <div class="track-title">פרק 1</div>
                     <div class="track-info">
