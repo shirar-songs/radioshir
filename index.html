@@ -60,6 +60,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            box-sizing: border-box;
+            padding: 0 10px; /* מניעת הצמדה מוחלטת לקצוות המסך */
         }
 
         /* אזור הנגן המרכזי */
@@ -85,11 +87,11 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* מיכל הנגן של גוגל דרייב - פותר את בעיית כפתור השמע וההרחבה */
+        /* מיכל הנגן של גוגל דרייב - רוחב יציב ומרווח למניעת חפיפת כפתורים */
         .drive-player-container {
             position: relative;
-            width: 92%;
-            max-width: 420px; /* הגדלת המקסימום כדי לתת לכפתורים מרחב נשימה */
+            width: 100%;
+            max-width: 440px; /* הגדלה נוספת כדי להבטיח מרחב לכפתורי השמע וההרחבה */
             height: 62px; 
             border-radius: 31px;
             overflow: hidden;
@@ -191,14 +193,13 @@
             font-family: 'Assistant', sans-serif;
         }
 
-        /* התאמות מדויקות למסכים ומניעת עלייה של כפתורים זה על זה */
+        /* התאמות מדויקות למסכים ומניעת עלייה של כפתורים זה על זה בנייד */
         @media (max-width: 450px) {
             .header-bg {
                 padding-top: 140px; 
             }
             .drive-player-container {
-                width: calc(100% - 10px); /* ניצול רוחב מקסימלי יציב בנייד */
-                transform: scale(0.95); /* כיווץ קל ופרופורציונלי ששומר על סידור הרכיבים */
+                width: 100%; /* רוחב מלא וטבעי בלי כיווץ scale דיגיטלי */
             }
         }
     </style>
@@ -263,7 +264,7 @@
             </div>
 
             <!-- פרק 1 -->
-            <div class="track-item" data-id="1cxid22jFkAsHGNMeqNBs27aCCoVKZZu6" data-title="פרק 1" data-date="2026-06-23" onclick="clickTrack(this)">
+            <div class="track-item" data-id="1cxid22jFkAsHGNMeqNBs27aCCoVKVKZZu6" data-title="פרק 1" data-date="2026-06-23" onclick="clickTrack(this)">
                 <div>
                     <div class="track-title">פרק 1</div>
                     <div class="track-info">
