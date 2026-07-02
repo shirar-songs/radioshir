@@ -42,24 +42,25 @@
             background: linear-gradient(to bottom, rgba(253, 251, 247, 0) 0%, #fdfbf7 100%);
         }
 
-        /* מיכל התוכן הראשי - מורחב למקסימום */
+        /* מיכל התוכן הראשי */
         .container {
             max-width: 550px;
-            width: 96%; 
+            width: 95%; 
             text-align: center;
             margin-top: -10px; 
             z-index: 2;
             padding-bottom: 40px;
         }
 
-        /* עיצוב אזור הנגן המרכזי - שונה כדי לתת מקסימום רוחב לנגן השחור */
+        /* עיצוב אזור הנגן המרכזי */
         .now-playing {
             background: #fffcf7;
-            padding: 20px 4px; /* צמצום דרסטי של השוליים בצדדים כדי שהנגן יתרחב לחלוטין */
+            padding: 20px 15px; 
             border-radius: 12px;
             margin-bottom: 30px;
             border: 2px solid #800020;
             box-shadow: 0 4px 15px rgba(74, 14, 23, 0.05);
+            overflow: hidden;
         }
 
         .now-playing h2 {
@@ -69,7 +70,7 @@
             margin-bottom: 15px;
         }
 
-        /* מיכל הנגן של גוגל דרייב - מתוח מקצה לקצה */
+        /* מיכל הנגן של גוגל דרייב */
         .drive-player-container {
             position: relative;
             width: 100%;
@@ -78,6 +79,9 @@
             overflow: hidden;
             border: 1px solid #eadecc;
             background: #f1f3f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         iframe {
@@ -158,14 +162,24 @@
             cursor: pointer;
         }
 
-        /* התאמה אגרסיבית מיוחדת לרוחב מלא בטלפונים ניידים */
+        /* פתרון אגרסיבי למסכים צרים של טלפונים ניידים */
         @media (max-width: 480px) {
             .container {
-                width: 98%; /* מנצל את כל רוחב המסך הפיזי של הנייד */
+                width: 100%; /* מריחה מלאה של התוכן מקצה לקצה */
             }
             .now-playing {
-                padding-left: 2px;
-                padding-right: 2px;
+                border-left: none;
+                border-right: none;
+                border-radius: 0; /* ביטול הקיעור בצדדים כדי להרוויח עוד פיקסלים */
+                padding: 20px 2px;
+            }
+            .drive-player-container {
+                width: 108%; /* מותח את גבולות המיכל החוצה */
+                left: -4%; /* מאזן את המתיחה למרכז המסך */
+                transform: scale(0.92); /* מקטין את הנגן והכפתורים בצורה אחידה כדי שלא יימחצו */
+            }
+            .playlist {
+                padding: 0 12px; /* שומר על מרחק יפה לרשימת השירים */
             }
         }
     </style>
