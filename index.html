@@ -42,10 +42,10 @@
             background: linear-gradient(to bottom, rgba(253, 251, 247, 0) 0%, #fdfbf7 100%);
         }
 
-        /* מיכל התוכן הראשי */
+        /* מיכל התוכן הראשי - מורחב למקסימום כדי לתת לנגן רוחב בנייד */
         .container {
-            max-width: 500px;
-            width: 92%; 
+            max-width: 550px;
+            width: 95%; 
             text-align: center;
             margin-top: -10px; 
             z-index: 2;
@@ -55,7 +55,7 @@
         /* עיצוב אזור הנגן המרכזי */
         .now-playing {
             background: #fffcf7;
-            padding: 20px 15px; 
+            padding: 20px 10px; /* מינימום שוליים בצדדים כדי להרוויח רוחב נטו לנגן */
             border-radius: 12px;
             margin-bottom: 30px;
             border: 2px solid #800020;
@@ -69,23 +69,27 @@
             margin-bottom: 15px;
         }
 
-        /* מיכל הנגן הנקי - מכיל רק כפתור פליי מובנה */
-        .audio-player-container {
+        /* מיכל הנגן של גוגל דרייב - תופס 100% רוחב ומרווח לחלוטין */
+        .drive-player-container {
+            position: relative;
             width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 5px 0;
+            height: 62px; 
+            border-radius: 31px;
+            overflow: hidden;
+            border: 1px solid #eadecc;
+            background: #f1f3f4;
         }
 
-        audio {
+        iframe {
             width: 100%;
-            max-width: 400px;
+            height: 100%;
+            border: none;
         }
 
         /* עיצוב רשימת הפרקים */
         .playlist {
             text-align: right;
+            padding: 0 5px;
         }
 
         .playlist h3 {
@@ -166,8 +170,8 @@
         <div class="now-playing">
             <h2 id="current-title">טוען את הפרק האחרון...</h2>
             
-            <div class="audio-player-container">
-                <audio id="audio-player" controls allow="autoplay"></audio>
+            <div class="drive-player-container">
+                <iframe id="drive-player" src="" allow="autoplay"></iframe>
             </div>
         </div>
 
@@ -258,13 +262,12 @@
             });
         }
 
-        // פונקציה לטעינת קובץ האודיו ישירות לנגן הדפדפן הנקי
+        // טעינת הנגן המקורי בפורמט preview הרחב
         function loadTrack(driveId, title) {
-            const player = document.getElementById('audio-player');
+            const player = document.getElementById('drive-player');
             const titleElement = document.getElementById('current-title');
 
-            // שימוש בקישור ישיר להזרמת האודיו נטו ללא ממשק גוגל
-            player.src = "https://docs.google.com/uc?export=download&id=" + driveId;
+            player.src = "https://drive.google.com/file/d/" + driveId + "/preview";
             titleElement.innerText = "מתנגן כעת: " + title;
         }
 
@@ -273,9 +276,6 @@
             const title = element.getAttribute('data-title');
             
             loadTrack(driveId, title);
-            
-            // אוטומציה להפעלת השיר מיד בלחיצה
-            document.getElementById('audio-player').play();
             
             localStorage.setItem('listened-' + title, 'true');
             element.querySelector('.listened-tag').style.display = 'inline-block';
