@@ -372,10 +372,11 @@
             localStorage.setItem('listened-' + title, 'true');
             trackItem.querySelector('.listened-tag').style.display = 'inline-block';
         }
-
-        window.onload = function() {
+window.onload = function() {
+            // 1. עדכון התאריכים של כל הפרקים
             updateTrackDates();
 
+            // 2. בדיקה והצגה של תגית "האזנת" לכל הפרקים ברשימה שכבר האזינו להם בעבר
             const tracks = document.querySelectorAll('.track-item');
             tracks.forEach(track => {
                 const title = track.getAttribute('data-title');
@@ -384,14 +385,19 @@
                 }
             });
 
+            // 3. טעינה אוטומטית של הפרק הראשון ברשימה לנגן למעלה
             const firstTrack = document.querySelector('.track-item');
             if (firstTrack) {
                 const firstId = firstTrack.getAttribute('data-id');
                 const firstTitle = firstTrack.getAttribute('data-title');
                 loadTrack(firstId, firstTitle);
+                
+                // בדיקה ספציפית: אם המשתמש כבר האזין לפרק הראשון הזה בעבר, נציג את התגית מיד
+                if (localStorage.getItem('listened-' + firstTitle) === 'true') {
+                    firstTrack.querySelector('.listened-tag').style.display = 'inline-block';
+                }
             }
         };
     </script>
-
 </body>
 </html>
