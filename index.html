@@ -5,17 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>הרדיו שלי</title>
     
-    <!-- טעינת הפונטים Assistant ו-David Libre מ-Google Fonts -->
+    <!-- טעינת הפונט Assistant מ-Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=David+Libre:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* הגדרת פונט ההנצחה המיוחד 'OH Tamir Adar' מתוך קבצי ה-Web שהעלית */
+        /* הגדרת פונט ההנצחה 'OH Tamir Adar' מתוך קבצי ה-Web */
         @font-face {
             font-family: 'OHTamirAdar';
             src: url('OHTamirAdar-Regular.woff2') format('woff2'),
                  url('OHTamirAdar-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* הגדרת פונט 'סיגלית' מתוך הקובץ בתיקייה */
+        @font-face {
+            font-family: 'Sigalit';
+            src: url('Sigalit.woff2') format('woff2'),
+                 url('Sigalit.woff') format('woff'),
+                 url('Sigalit.ttf') format('truetype'),
+                 url('Sigalit.otf') format('opentype');
             font-weight: normal;
             font-style: normal;
         }
@@ -88,9 +99,9 @@
             width: 100%;
         }
 
-        /* שורת "מתנגן כעת" בפונט דיויד ליברה */
+        /* שורת "מתנגן כעת" בפונט סיגלית */
         .now-playing h2 {
-            font-family: 'David Libre', serif;
+            font-family: 'Sigalit', sans-serif;
             font-size: 22px;
             margin-top: 0;
             color: #800020;
@@ -164,9 +175,9 @@
             background: #fdfbf7;
         }
 
-        /* שמות הפרקים ברשימה בפונט דיויד ליברה */
+        /* שמות הפרקים ברשימה בפונט סיגלית */
         .track-title {
-            font-family: 'David Libre', serif;
+            font-family: 'Sigalit', sans-serif;
             font-weight: 700;
             font-size: 18px;
             color: #4a0e17;
