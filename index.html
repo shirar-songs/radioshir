@@ -94,22 +94,32 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* מיכל הנגן הקלאסי והקומפקטי */
-        .audio-player-container {
+        /* מיכל הנגן של גוגל דרייב */
+        .drive-player-container {
+            position: relative;
             width: 100%;
-            max-width: 300px;
-            display: flex;
-            justify-content: center;
+            max-width: 340px;
+            height: 50px;
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid #ebdcc5;
+            background-color: #fcf9f2;
+            box-shadow: 0 2px 8px rgba(128, 0, 32, 0.06);
+            box-sizing: border-box;
+            margin: 0 auto;
         }
 
-        audio {
+        iframe {
             width: 100%;
-            height: 40px;
-            border-radius: 20px;
-            outline: none;
+            height: 80px;
+            margin-top: -15px;
+            border: none;
+            display: block;
+            filter: invert(0.88) hue-rotate(180deg) contrast(0.9);
+            mix-blend-mode: multiply;
         }
 
-        /* עיצוב רשימת הפרקים - יושבת בחוץ על רקע השמנת */
+        /* עיצוב רשימת הפרקים */
         .playlist-wrapper {
             width: 90%;
             max-width: 500px;
@@ -122,7 +132,6 @@
             padding: 0 2px;
         }
 
-        /* כותרת הפרקים הנוספים */
         .playlist h3 {
             font-size: 18px;
             color: #800020;
@@ -180,7 +189,7 @@
             display: none; 
         }
 
-        /* כפתור נגן - משתמש בלעדית בפונט OHTamirAdar */
+        /* כפתור נגן */
         .play-btn {
             background: #800020;
             color: #fdfbf7;
@@ -198,13 +207,12 @@
             background: #9e1331;
         }
 
-        /* התאמות מדויקות למסכים ומניעת עלייה של כפתורים זה על זה בנייד */
         @media (max-width: 450px) {
             .header-bg {
                 padding-top: 140px; 
             }
-            .audio-player-container {
-                width: 90%; 
+            .drive-player-container {
+                width: 100%; 
             }
         }
     </style>
@@ -219,16 +227,14 @@
                     <iframe id="drive-player" src="" allow="autoplay"></iframe>
                 </div>
             </div>
-            <div class="playlist">     
-                <h3>פרקים נוספים:</h3>
-            </div>
         </div>
     </div>
 
     <div class="playlist-wrapper">
         <div class="playlist" id="playlist-container">
+            <h3>פרקים נוספים:</h3>
 
-             <div class="track-item" data-id="1eeEoYbSgd2zsLI0o33_PdRdEghqF2KOj" data-title="פרק 10" data-date="2026-07-27">
+            <div class="track-item" data-id="1eeEoYbSgd2zsLI0o33_PdRdEghqF2KOj" data-title="פרק 10" data-date="2026-07-27">
                 <div>
                     <div class="track-title">פרק 10</div>
                     <div class="track-info">
@@ -239,8 +245,7 @@
                 <button class="play-btn" onclick="clickTrack(this)">נגן</button>
             </div>
             
-            
-             <div class="track-item" data-id="1M1QamGZUis4j0PoQuEvyBMMcW0mX3Dvr" data-title="פרק 9" data-date="2026-07-25">
+            <div class="track-item" data-id="1M1QamGZUis4j0PoQuEvyBMMcW0mX3Dvr" data-title="פרק 9" data-date="2026-07-25">
                 <div>
                     <div class="track-title">פרק 9</div>
                     <div class="track-info">
@@ -251,7 +256,7 @@
                 <button class="play-btn" onclick="clickTrack(this)">נגן</button>
             </div>
             
-             <div class="track-item" data-id="12U6fUGXmXGfCJENy5jfKGGWxN-2gLYqm" data-title="פרק 8" data-date="2026-07-23">
+            <div class="track-item" data-id="12U6fUGXmXGfCJENy5jfKGGWxN-2gLYqm" data-title="פרק 8" data-date="2026-07-23">
                 <div>
                     <div class="track-title">פרק 8</div>
                     <div class="track-info">
@@ -262,7 +267,7 @@
                 <button class="play-btn" onclick="clickTrack(this)">נגן</button>
             </div>
             
-             <div class="track-item" data-id="1CKMSCGxjaFwuWq4Gt4PGkY0Xlcd6PHsK" data-title="פרק 7" data-date="2026-07-13">
+            <div class="track-item" data-id="1CKMSCGxjaFwuWq4Gt4PGkY0Xlcd6PHsK" data-title="פרק 7" data-date="2026-07-13">
                 <div>
                     <div class="track-title">פרק 7</div>
                     <div class="track-info">
@@ -273,7 +278,7 @@
                 <button class="play-btn" onclick="clickTrack(this)">נגן</button>
             </div>
            
-             <div class="track-item" data-id="1v_-xUvuq-mXvjp3_Y8wBVhOrsbW18Uvo" data-title="פרק 6" data-date="2026-07-12">
+            <div class="track-item" data-id="1v_-xUvuq-mXvjp3_Y8wBVhOrsbW18Uvo" data-title="פרק 6" data-date="2026-07-12">
                 <div>
                     <div class="track-title">פרק 6</div>
                     <div class="track-info">
@@ -294,7 +299,6 @@
                 </div>
                 <button class="play-btn" onclick="clickTrack(this)">נגן</button>
             </div>
-            
 
             <div class="track-item" data-id="1WutDUMIWzXUVzWbL_N1nyfGbvC2XB5kM" data-title="פרק 4" data-date="2026-07-02">
                 <div>
@@ -342,6 +346,7 @@
 
         </div>
     </div>
+
     <script>
         function updateTrackDates() {
             const tracks = document.querySelectorAll('.track-item');
@@ -387,7 +392,6 @@
             titleElement.innerText = "מתנגן כעת: " + title;
         }
 
-        // שינוי קטן כאן: כעת הפונקציה מקבלת את הכפתור, ומוצאת את השורה העוטפת (trackItem)
         function clickTrack(buttonElement) {
             const trackItem = buttonElement.closest('.track-item');
             const driveId = trackItem.getAttribute('data-id');
@@ -398,11 +402,10 @@
             localStorage.setItem('listened-' + title, 'true');
             trackItem.querySelector('.listened-tag').style.display = 'inline-block';
         }
-window.onload = function() {
-            // 1. עדכון התאריכים של כל הפרקים
+
+        window.onload = function() {
             updateTrackDates();
 
-            // 2. בדיקה והצגה של תגית "האזנת" לכל הפרקים ברשימה שכבר האזינו להם בעבר
             const tracks = document.querySelectorAll('.track-item');
             tracks.forEach(track => {
                 const title = track.getAttribute('data-title');
@@ -411,14 +414,12 @@ window.onload = function() {
                 }
             });
 
-            // 3. טעינה אוטומטית של הפרק הראשון ברשימה לנגן למעלה
             const firstTrack = document.querySelector('.track-item');
             if (firstTrack) {
                 const firstId = firstTrack.getAttribute('data-id');
                 const firstTitle = firstTrack.getAttribute('data-title');
                 loadTrack(firstId, firstTitle);
                 
-                // בדיקה ספציפית: אם המשתמש כבר האזין לפרק הראשון הזה בעבר, נציג את התגית מיד
                 if (localStorage.getItem('listened-' + firstTitle) === 'true') {
                     firstTrack.querySelector('.listened-tag').style.display = 'inline-block';
                 }
