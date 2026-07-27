@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
     <style>
         /* הגדרת פונט ההנצחה המיוחד 'OH Tamir Adar' מתוך קבצי ה-Web שהעלית */
         @font-face {
@@ -94,31 +93,22 @@
             font-weight: 700;
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
-/* מיכל הנגן של גוגל דרייב - מעודכן: קטן, קומפקטי ובגווני שמנת */
-        .drive-player-container {
-            position: relative;
+
+        /* מיכל הנגן הקלאסי והקומפקטי */
+        .audio-player-container {
             width: 100%;
-            max-width: 340px; /* הקטנת הרוחב */
-            height: 50px;      /* גובה מצומצם שימנע מהנגן להיות מסיבי */
-            border-radius: 25px;
-            overflow: hidden;
-            border: 1px solid #ebdcc5;
-            background-color: #fcf9f2; /* רקע שמנת זהה לעמוד */
-            box-shadow: 0 2px 8px rgba(128, 0, 32, 0.06);
-            box-sizing: border-box;
-            margin: 0 auto;
+            max-width: 300px;
+            display: flex;
+            justify-content: center;
         }
 
-        /* התאמת ה-iframe הפנימי של גוגל דרייב והעלמת הרקע השחור */
-        iframe {
+        audio {
             width: 100%;
-            height: 80px;      /* גובה פנימי רחב שמונע חיתוך כפתורים */
-            margin-top: -15px; /* הסתרת השוליים המיותרים של דרייב */
-            border: none;
-            display: block;
-            filter: invert(0.88) hue-rotate(180deg) contrast(0.9); /* הופך את הנגן הכהה לבהיר */
-            mix-blend-mode: multiply;
+            height: 40px;
+            border-radius: 20px;
+            outline: none;
         }
+
         /* עיצוב רשימת הפרקים - יושבת בחוץ על רקע השמנת */
         .playlist-wrapper {
             width: 90%;
@@ -144,7 +134,7 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* כרטיסיות הפרקים - הסרנו את ה-cursor: pointer */
+        /* כרטיסיות הפרקים */
         .track-item {
             display: flex;
             justify-content: space-between;
@@ -158,7 +148,6 @@
             box-shadow: 0 2px 6px rgba(128,0,32,0.02);
         }
 
-        /* הסרנו את שינוי הצבע הדרמטי ב-hover כדי שהיא לא תרגיש לחיצה */
         .track-item:hover {
             background: #fdfbf7;
         }
@@ -191,7 +180,7 @@
             display: none; 
         }
 
-        /* כפתור נגן - משתמש בלעדית בפונט OHTamirAdar שהעלית */
+        /* כפתור נגן - משתמש בלעדית בפונט OHTamirAdar */
         .play-btn {
             background: #800020;
             color: #fdfbf7;
@@ -200,13 +189,13 @@
             border-radius: 6px;
             font-weight: normal;
             font-size: 17px; 
-            cursor: pointer; /* האצבע של הלחיצה מופיעה רק כאן עכשיו */
+            cursor: pointer;
             font-family: 'OHTamirAdar', sans-serif; 
             line-height: 1;
         }
         
         .play-btn:hover {
-            background: #9e1331; /* אפקט ריחוף עדין רק לכפתור */
+            background: #9e1331;
         }
 
         /* התאמות מדויקות למסכים ומניעת עלייה של כפתורים זה על זה בנייד */
@@ -214,8 +203,8 @@
             .header-bg {
                 padding-top: 140px; 
             }
-            .drive-player-container {
-                width: 100%; 
+            .audio-player-container {
+                width: 90%; 
             }
         }
     </style>
