@@ -53,7 +53,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 180px; 
+            /* הגדלנו את המרווח העליון כדי לדחוף את הכותרת והנגן למטה מעבר לתמונה */
+            padding-top: 250px; 
         }
 
         /* אפקט המיזוג החלק של התמונה אל תוך השמנת בתחתית אזור הלוגו */
@@ -81,7 +82,8 @@
             box-sizing: border-box;
             padding: 0 10px;
         }
-/* אזור הנגן המרכזי */
+
+        /* אזור הנגן המרכזי */
         .now-playing {
             background: transparent;
             padding: 10px 0;
@@ -98,24 +100,25 @@
         /* שורת "מתנגן כעת" בפונט סיגלית */
         .now-playing h2 {
             font-family: 'Sigalit', sans-serif;
-            font-size: 20px;
+            font-size: 22px;
             margin-top: 0;
             color: #800020;
             margin-bottom: 15px;
             font-weight: 700;
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
-/* מיכל הנגן של גוגל דרייב - עיצוב מלבני נקי ופתוח */
+
+        /* מיכל הנגן של גוגל דרייב - התאמת גובה שלא ייחתך */
         .drive-player-container {
             position: relative;
             width: 100%;
-            max-width: 440px;    /* רוחב נוח שמונע דחיסה */
-            height: 90px;        /* גובה מלא כדי ששום רכיב לא ייחתך */
-            border-radius: 12px; /* פינות מעוגלות בעדינות (לא בועה) */
+            max-width: 460px;    
+            height: 130px;        /* הוגדל מ-90px כדי להכיל את הנגן במלואו ללא חיתוכים */
+            border-radius: 12px; 
             overflow: hidden;
             border: 1px solid #ebdcc5;
-            background-color: #222222; /* רקע כהה אחיד שתואם לנגן */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            background-color: #222222; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
             margin: 0 auto;
         }
@@ -127,6 +130,7 @@
             border: none;
             display: block;
         }
+
         /* עיצוב רשימת הפרקים */
         .playlist-wrapper {
             width: 90%;
@@ -139,10 +143,11 @@
             text-align: right;
             padding: 0 2px;
         }
-/* כותרת "פרקים נוספים" בפונט תמיר אדר */
+
+        /* כותרת "פרקים נוספים" בפונט תמיר אדר */
         .playlist h3 {
             font-family: 'OHTamirAdar', sans-serif;
-            font-size: 26px; /* מעודכן ל-26px */
+            font-size: 26px;
             color: #800020;
             border-bottom: 2px solid #800020;
             padding-bottom: 8px;
@@ -217,18 +222,19 @@
         .play-btn:hover {
             background: #9e1331;
         }
-@media (max-width: 450px) {
+
+        @media (max-width: 450px) {
             .header-bg {
-                padding-top: 140px; 
+                padding-top: 190px; /* התאמה למסכים קטנים */
             }
             .drive-player-container {
-                width: 95%;        /* מונע מהכרטיסייה להיצמד ממש לקצוות המסך בנייד */
-                height: 90px;      /* מבטיח גובה מלא כדי שהנגן לא ייחתך בנייד */
+                width: 95%;        
+                height: 130px;      /* גובה מותאם שלא ייחתך בנייד */
             }
             .play-btn {
                 padding: 6px 12px;
                 font-size: 15px;
-                white-space: nowrap; /* פותר את בעיית חיתוך הטקסט "נגן" בכפתורים האדומים */
+                white-space: nowrap;
             }
         }
     </style>
