@@ -81,8 +81,7 @@
             box-sizing: border-box;
             padding: 0 10px;
         }
-
-        /* אזור הנגן המרכזי */
+/* אזור הנגן המרכזי */
         .now-playing {
             background: transparent;
             padding: 10px 0;
@@ -107,18 +106,19 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* מיכל הנגן של גוגל דרייב */
+        /* מיכל הנגן של גוגל דרייב - מותאם למניעת חיתוך */
         .drive-player-container {
             position: relative;
             width: 100%;
-            max-width: 440px; 
-            height: 62px; 
-            border-radius: 31px;
+            max-width: 360px; /* רוחב שמכיל את כפתורי הנגן בנוחות */
+            height: 90px;     /* גובה מספיק שמונע חיתוך עליון ותחתון של הזמנים והכפתורים */
+            border-radius: 16px; /* פינות מעוגלות עדינות שלא חותכות את הפינות */
             overflow: hidden;
-            border: 1px solid #eadecc;
-            background: #f1f3f4;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #ebdcc5;
+            background-color: #222222; /* רקע כהה נקי שתואם לגוגל דרייב ומעלים את השוליים */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             box-sizing: border-box;
+            margin: 0 auto;
         }
 
         iframe {
@@ -126,8 +126,9 @@
             height: 100%;
             border: none;
             display: block;
+            transform: scale(0.92); /* הקטנה עדינה כדי שכל הנגן ייכנס בצורה קומפקטית */
+            transform-origin: center center;
         }
-
         /* עיצוב רשימת הפרקים */
         .playlist-wrapper {
             width: 90%;
