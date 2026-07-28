@@ -217,13 +217,18 @@
         .play-btn:hover {
             background: #9e1331;
         }
-
-        @media (max-width: 450px) {
+@media (max-width: 450px) {
             .header-bg {
                 padding-top: 140px; 
             }
             .drive-player-container {
-                width: 100%; 
+                width: 95%;        /* מונע מהכרטיסייה להיצמד ממש לקצוות המסך בנייד */
+                height: 90px;      /* מבטיח גובה מלא כדי שהנגן לא ייחתך בנייד */
+            }
+            .play-btn {
+                padding: 6px 12px;
+                font-size: 15px;
+                white-space: nowrap; /* פותר את בעיית חיתוך הטקסט "נגן" בכפתורים האדומים */
             }
         }
     </style>
