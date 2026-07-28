@@ -105,28 +105,31 @@
             font-weight: 700;
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
-/* מיכל הנגן של גוגל דרייב - קטן וקומפקטי */
+/* מיכל הנגן של גוגל דרייב - קופסה עגולה וקומפקטית */
         .drive-player-container {
             position: relative;
             width: 100%;
-            max-width: 360px;
-            height: 60px;     /* שמירה על הגובה הקטן של הקופסה */
-            border-radius: 30px;
+            max-width: 380px;
+            height: 56px;        /* גובה מדויק כמו בתמונה */
+            border-radius: 28px; /* פינות מעוגלות מושלמות */
             overflow: hidden;
             border: 1px solid #ebdcc5;
-            background-color: #222222; /* רקע כהה אחיד שמעלים שוליים */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            background-color: #1a1a1a; /* רקע כהה למראה אחיד */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
             box-sizing: border-box;
             margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* תיקון המיקוד הפנימי של הנגן כדי למנוע חיתוך מלמעלה */
+        /* יישור והתאמת ה-iframe הפנימי כך שייראה נקי בכל מצב */
         iframe {
             width: 100%;
-            height: 90px;      /* גובה פנימי מלא שמכיל את כל הנגן */
+            height: 100px;       /* גובה פנימי רחב שמונע חיתוך כפתורים */
             border: none;
             display: block;
-            margin-top: -15px;  /* הזזה למעלה כדי למרכז בדיוק את כפתור ה-Play והזמנים */
+            margin-top: -22px;   /* ממרכז בדיוק את שורת הנגן לתוך ה-56px */
         }
         /* עיצוב רשימת הפרקים */
         .playlist-wrapper {
