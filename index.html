@@ -106,28 +106,33 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* מיכל הנגן של גוגל דרייב - מותאם למניעת חיתוך */
+        /* מיכל הנגן של גוגל דרייב - קטן וקומפקטי */
         .drive-player-container {
             position: relative;
             width: 100%;
-            max-width: 360px; /* רוחב שמכיל את כפתורי הנגן בנוחות */
-            height: 90px;     /* גובה מספיק שמונע חיתוך עליון ותחתון של הזמנים והכפתורים */
-            border-radius: 16px; /* פינות מעוגלות עדינות שלא חותכות את הפינות */
+            max-width: 360px; /* רוחב מצומצם */
+            height: 60px;     /* גובה נמוך וקומפקטי */
+            border-radius: 30px;
             overflow: hidden;
             border: 1px solid #ebdcc5;
-            background-color: #222222; /* רקע כהה נקי שתואם לגוגל דרייב ומעלים את השוליים */
+            background-color: #1e1e1e; /* רקע כהה נקי למיזוג השוליים */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             box-sizing: border-box;
             margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* הקטנת הנגן הפנימי (iframe) כך שייכנס במלואו למסגרת הקטנה */
         iframe {
-            width: 100%;
-            height: 100%;
+            width: 125%;      /* הרחבת פריסת הבסיס לפני ההקטנה */
+            height: 90px;     /* גובה פנימי מלא שמנוע חיתוך פקדים */
             border: none;
             display: block;
-            transform: scale(0.92); /* הקטנה עדינה כדי שכל הנגן ייכנס בצורה קומפקטית */
+            transform: scale(0.72); /* הקטנת הנגן ל-72% כדי להכניס את כל הפקדים */
             transform-origin: center center;
+            margin-top: -5px;  /* מרכוז אנכי מדויק */
         }
         /* עיצוב רשימת הפרקים */
         .playlist-wrapper {
