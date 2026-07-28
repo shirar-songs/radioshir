@@ -53,8 +53,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* הגדלנו את המרווח העליון כדי לדחוף את הכותרת והנגן למטה מעבר לתמונה */
-            padding-top: 250px; 
+            padding-top: 180px; 
         }
 
         /* אפקט המיזוג החלק של התמונה אל תוך השמנת בתחתית אזור הלוגו */
@@ -82,8 +81,7 @@
             box-sizing: border-box;
             padding: 0 10px;
         }
-
-        /* אזור הנגן המרכזי */
+/* אזור הנגן המרכזי */
         .now-playing {
             background: transparent;
             padding: 10px 0;
@@ -107,30 +105,29 @@
             font-weight: 700;
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
-/* מיכל הנגן של גוגל דרייב - נגן קומפקטי ונקי */
-.drive-player-container {
-    position: relative;
-    width: 100%;
-    max-width: 360px;     /* קצת יותר צר כדי שישב יפה במרכז */
-    height: 60px;         /* גובה נמוך גורם לדרייב להציג רק פס נקי עם פליי! */
-    border-radius: 30px;  /* פינות עגולות ויפות כמו קפסולה */
-    overflow: hidden;
-    border: 1px solid #ebdcc5;
-    background-color: #222222; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    
-    /* מרכוס מושלם והורדה למטה */
-    margin: 40px auto 0 auto; 
-}
+/* מיכל הנגן של גוגל דרייב - קטן וקומפקטי */
+        .drive-player-container {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            height: 60px;     /* שמירה על הגובה הקטן של הקופסה */
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid #ebdcc5;
+            background-color: #222222; /* רקע כהה אחיד שמעלים שוליים */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
 
-/* ה-iframe */
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-}
+        /* תיקון המיקוד הפנימי של הנגן כדי למנוע חיתוך מלמעלה */
+        iframe {
+            width: 100%;
+            height: 90px;      /* גובה פנימי מלא שמכיל את כל הנגן */
+            border: none;
+            display: block;
+            margin-top: -15px;  /* הזזה למעלה כדי למרכז בדיוק את כפתור ה-Play והזמנים */
+        }
         /* עיצוב רשימת הפרקים */
         .playlist-wrapper {
             width: 90%;
@@ -143,11 +140,10 @@ iframe {
             text-align: right;
             padding: 0 2px;
         }
-
-        /* כותרת "פרקים נוספים" בפונט תמיר אדר */
+/* כותרת "פרקים נוספים" בפונט תמיר אדר */
         .playlist h3 {
             font-family: 'OHTamirAdar', sans-serif;
-            font-size: 26px;
+            font-size: 26px; /* מעודכן ל-26px */
             color: #800020;
             border-bottom: 2px solid #800020;
             padding-bottom: 8px;
@@ -225,16 +221,10 @@ iframe {
 
         @media (max-width: 450px) {
             .header-bg {
-                padding-top: 190px; /* התאמה למסכים קטנים */
+                padding-top: 140px; 
             }
             .drive-player-container {
-                width: 95%;        
-                height: 130px;      /* גובה מותאם שלא ייחתך בנייד */
-            }
-            .play-btn {
-                padding: 6px 12px;
-                font-size: 15px;
-                white-space: nowrap;
+                width: 100%; 
             }
         }
     </style>
