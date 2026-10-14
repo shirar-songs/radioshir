@@ -107,28 +107,31 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* מיכל הנגן של גוגל דרייב - סימטריה מלאה ומושלמת */
+        /* מיכל הנגן של גוגל דרייב - פתרון מלא בלי חיתוכים */
         .drive-player-container {
             position: relative;
             width: 100%;
             max-width: 380px;
-            height: 64px;     
-            border-radius: 32px;
+            height: 52px;     /* גובה מדויק שמתאים בול לפס של גוגל דרייב */
+            border-radius: 26px;
             overflow: hidden;
             border: 1px solid #ebdcc5;
             background-color: #222222; /* רקע כהה אחיד */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             box-sizing: border-box;
             margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* התאמת ה-iframe עם מרכוז אנכי מדויק ללא חיתוך למעלה או למטה */
+        /* טעינת ה-iframe בגודל מלא כך ששום דבר לא ייחתך מעבר לקופסה */
         iframe {
             width: 100%;
-            height: 120px;     
+            height: 150px;     
             border: none;
             display: block;
-            margin-top: -28px; /* מרכוז סימטרי מדויק לבקרים ולזמנים */
+            margin-top: -49px; /* הזזה מדויק כדי למרכז את הפס השחור בתוך המסגרת העגולה */
         }
 
         /* עיצוב רשימת הפרקים */
@@ -245,9 +248,6 @@
             </div>
         </div>
     </div>
-
-    <!-- אזור נסתר לטעינה מוקדמת של הנגנים לזרוז המעברים -->
-    <div id="preload-container" style="display:none;"></div>
 
     <div class="playlist-wrapper">
         <div class="playlist" id="playlist-container">
@@ -495,13 +495,7 @@
             const player = document.getElementById('drive-player');
             const titleElement = document.getElementById('current-title');
 
-            const cachedPlayer = document.getElementById('preload-' + driveId);
-            if (cachedPlayer) {
-                player.src = cachedPlayer.src;
-            } else {
-                player.src = "https://drive.google.com/file/d/" + driveId + "/preview";
-            }
-            
+            player.src = "https://drive.google.com/file/d/" + driveId + "/preview";
             titleElement.innerText = "מתנגן כעת: " + title;
         }
 
@@ -520,20 +514,11 @@
             updateTrackDates();
 
             const tracks = document.querySelectorAll('.track-item');
-            const preloadContainer = document.getElementById('preload-container');
-
             tracks.forEach(track => {
                 const title = track.getAttribute('data-title');
-                const driveId = track.getAttribute('data-id');
-
                 if (localStorage.getItem('listened-' + title) === 'true') {
                     track.querySelector('.listened-tag').style.display = 'inline-block';
                 }
-
-                const preIframe = document.createElement('iframe');
-                preIframe.id = 'preload-' + driveId;
-                preIframe.src = "https://drive.google.com/file/d/" + driveId + "/preview";
-                preloadContainer.appendChild(preIframe);
             });
 
             const firstTrack = document.querySelector('.track-item');
