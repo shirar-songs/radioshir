@@ -107,28 +107,31 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* מיכל הנגן של גוגל דרייב - מותאם כך שלא יחתוך כלום */
+        /* מיכל הנגן של גוגל דרייב - מותאם סימטרית */
         .drive-player-container {
             position: relative;
             width: 100%;
             max-width: 380px;
-            height: 80px;     /* הגדלת הגובה להכלה מלאה של הנגן */
-            border-radius: 40px;
+            height: 64px;     /* גובה מדויק לנגן */
+            border-radius: 32px;
             overflow: hidden;
             border: 1px solid #ebdcc5;
             background-color: #222222; /* רקע כהה אחיד */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             box-sizing: border-box;
             margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* התאמת ה-iframe למרכוז מדויק ללא חיתוכים */
+        /* מרכוז סימטרי של ה-iframe ללא חיתוך למעלה או למטה */
         iframe {
             width: 100%;
-            height: 100px;     
+            height: 120px;     
             border: none;
             display: block;
-            margin-top: -10px; /* התאמה עדינה למרכוז האנכי */
+            margin-top: 0;     /* איפוס ההזזה כדי ליצור סימטריה מלאה */
         }
 
         /* עיצוב רשימת הפרקים */
