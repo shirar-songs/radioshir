@@ -81,7 +81,8 @@
             box-sizing: border-box;
             padding: 0 10px;
         }
-/* אזור הנגן המרכזי */
+
+        /* אזור הנגן המרכזי */
         .now-playing {
             background: transparent;
             padding: 10px 0;
@@ -105,29 +106,31 @@
             font-weight: 700;
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
-/* מיכל הנגן של גוגל דרייב - קטן וקומפקטי */
+
+        /* מיכל הנגן של גוגל דרייב - מותאם כך שלא יחתוך כלום */
         .drive-player-container {
             position: relative;
             width: 100%;
-            max-width: 360px;
-            height: 60px;     /* שמירה על הגובה הקטן של הקופסה */
-            border-radius: 30px;
+            max-width: 380px;
+            height: 80px;     /* הגדלת הגובה להכלה מלאה של הנגן */
+            border-radius: 40px;
             overflow: hidden;
             border: 1px solid #ebdcc5;
-            background-color: #222222; /* רקע כהה אחיד שמעלים שוליים */
+            background-color: #222222; /* רקע כהה אחיד */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             box-sizing: border-box;
             margin: 0 auto;
         }
 
-        /* תיקון המיקוד הפנימי של הנגן כדי למנוע חיתוך מלמעלה */
+        /* התאמת ה-iframe למרכוז מדויק ללא חיתוכים */
         iframe {
             width: 100%;
-            height: 90px;      /* גובה פנימי מלא שמכיל את כל הנגן */
+            height: 100px;     
             border: none;
             display: block;
-            margin-top: -15px;  /* הזזה למעלה כדי למרכז בדיוק את כפתור ה-Play והזמנים */
+            margin-top: -10px; /* התאמה עדינה למרכוז האנכי */
         }
+
         /* עיצוב רשימת הפרקים */
         .playlist-wrapper {
             width: 90%;
@@ -140,10 +143,11 @@
             text-align: right;
             padding: 0 2px;
         }
-/* כותרת "פרקים נוספים" בפונט תמיר אדר */
+
+        /* כותרת "פרקים נוספים" בפונט תמיר אדר */
         .playlist h3 {
             font-family: 'OHTamirAdar', sans-serif;
-            font-size: 26px; /* מעודכן ל-26px */
+            font-size: 26px;
             color: #800020;
             border-bottom: 2px solid #800020;
             padding-bottom: 8px;
@@ -246,7 +250,7 @@
         <div class="playlist" id="playlist-container">
             <h3>פרקים נוספים:</h3>
 
-              <div class="track-item" data-id="`1cJ3lvHJZqwCoTtRoOfhZ5ynNAc9Cvpb2`" data-title="פרק 18" data-date="2026-10-13">
+             <div class="track-item" data-id="1cJ3lvHJZqwCoTtRoOfhZ5ynNAc9Cvpb2" data-title="פרק 18" data-date="2026-10-13">
                 <div>
                     <div class="track-title">פרק 18</div>
                     <div class="track-info">
@@ -257,7 +261,7 @@
                 <button class="play-btn" onclick="clickTrack(this)">נגן</button>
             </div>
             
-              <div class="track-item" data-id="1MKj8uGfzANyuhb-M1teu75iLEGy8Fc8k" data-title="פרק 17" data-date="2026-10-06">
+             <div class="track-item" data-id="1MKj8uGfzANyuhb-M1teu75iLEGy8Fc8k" data-title="פרק 17" data-date="2026-10-06">
                 <div>
                     <div class="track-title">פרק 17</div>
                     <div class="track-info">
@@ -268,7 +272,7 @@
                 <button class="play-btn" onclick="clickTrack(this)">נגן</button>
             </div>
             
-              <div class="track-item" data-id="1-FBAOeCbEyqRfzwBNk6yAfTI8FJY5LqF" data-title="פרק 16" data-date="2026-09-20">
+             <div class="track-item" data-id="1-FBAOeCbEyqRfzwBNk6yAfTI8FJY5LqF" data-title="פרק 16" data-date="2026-09-20">
                 <div>
                     <div class="track-title">פרק 16</div>
                     <div class="track-info">
@@ -279,7 +283,7 @@
                 <button class="play-btn" onclick="clickTrack(this)">נגן</button>
             </div>
             
-              <div class="track-item" data-id="1OIequKvTDEQGDVIhxXS46v0cdyMzO_Ts" data-title="פרק 15" data-date="2026-09-16">
+             <div class="track-item" data-id="1OIequKvTDEQGDVIhxXS46v0cdyMzO_Ts" data-title="פרק 15" data-date="2026-09-16">
                 <div>
                     <div class="track-title">פרק 15</div>
                     <div class="track-info">
@@ -290,7 +294,7 @@
                 <button class="play-btn" onclick="clickTrack(this)">נגן</button>
             </div>
             
-              <div class="track-item" data-id="1tVyOc0WUYWS_2fPZLKtKnY-FD-sYK-8w" data-title="פרק 14" data-date="2026-09-02">
+             <div class="track-item" data-id="1tVyOc0WUYWS_2fPZLKtKnY-FD-sYK-8w" data-title="פרק 14" data-date="2026-09-02">
                 <div>
                     <div class="track-title">פרק 14</div>
                     <div class="track-info">
