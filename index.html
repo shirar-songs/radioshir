@@ -107,31 +107,28 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* מיכל הנגן של גוגל דרייב - פתרון מלא בלי חיתוכים */
+        /* מיכל הנגן של גוגל דרייב - ממומרכז, סימטרי לחלוטין וללא שטח ריק */
         .drive-player-container {
             position: relative;
             width: 100%;
             max-width: 380px;
-            height: 52px;     /* גובה מדויק שמתאים בול לפס של גוגל דרייב */
-            border-radius: 26px;
+            height: 60px;     /* גובה מדויק שמשאיר מקום נקי לפס השחור בול */
+            border-radius: 30px;
             overflow: hidden;
             border: 1px solid #ebdcc5;
             background-color: #222222; /* רקע כהה אחיד */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             box-sizing: border-box;
             margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        /* טעינת ה-iframe בגודל מלא כך ששום דבר לא ייחתך מעבר לקופסה */
+        /* ה-iframe מוגדל ומוזסט למטה כך שפס האודיו יושב בדיוק במרכז הסימטרי של הקופסה */
         iframe {
             width: 100%;
-            height: 150px;     
+            height: 200px;     
             border: none;
             display: block;
-            margin-top: -49px; /* הזזה מדויק כדי למרכז את הפס השחור בתוך המסגרת העגולה */
+            margin-top: -72px; /* ממזער את השטח למעלה ולמטה באופן מדויק ושווה */
         }
 
         /* עיצוב רשימת הפרקים */
