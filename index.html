@@ -238,7 +238,7 @@
             <div class="now-playing">
                 <h2 id="current-title">טוען את הפרק האחרון...</h2>
                 <div class="custom-audio-container">
-                    <audio id="audio-player" controls autoplay></audio>
+                    <audio id="audio-player" controls></audio>
                 </div>
             </div>
         </div>
@@ -486,14 +486,20 @@
             });
         }
 
-        function loadTrack(driveId, title) {
+        function loadTrack(driveId, title, shouldPlay = false) {
             const player = document.getElementById('audio-player');
             const titleElement = document.getElementById('current-title');
 
-            // שימוש בקישור הורדה ישיר של גוגל דרייב שעובד מושלם עם תגית audio
+            // תיקון כתובת ה-URL לגוגל דרייב כך שתוריד/תנגן את הקובץ הישיר ולא את עמוד ה-HTML
             player.src = "https://docs.google.com/uc?export=download&id=" + driveId;
             titleElement.innerText = "מתנגן כעת: " + title;
             player.load();
+
+            if (shouldPlay) {
+                player.play().catch(error => {
+                    console.log("הדפדפן מנע ניגון אוטומטי:", error);
+                });
+            }
         }
 
         function clickTrack(buttonElement) {
@@ -501,7 +507,7 @@
             const driveId = trackItem.getAttribute('data-id');
             const title = trackItem.getAttribute('data-title');
             
-            loadTrack(driveId, title);
+            loadTrack(driveId, title, true);
             
             localStorage.setItem('listened-' + title, 'true');
             trackItem.querySelector('.listened-tag').style.display = 'inline-block';
@@ -522,7 +528,8 @@
             if (firstTrack) {
                 const firstId = firstTrack.getAttribute('data-id');
                 const firstTitle = firstTrack.getAttribute('data-title');
-                loadTrack(firstId, firstTitle);
+                // בטעינת העמוד הראשונית לא נפעיל אוטומטית (false) כדי להימנע فحסימת דפדפן, אלא רק נטען את הנגן
+                loadTrack(firstId, firstTitle, false);
             }
         };
     </script>
