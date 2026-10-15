@@ -107,30 +107,24 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* עיצוב המיכל הכהה והמעוגל סביב נגן הדרייב */
+        /* מיכל הנגן הנקי - ללא מסגרת שחורה */
         .custom-audio-container {
             width: 100%;
-            max-width: 380px;
-            background-color: #222222;
-            border-radius: 30px;
-            padding: 8px 15px;
-            border: 1px solid #ebdcc5;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            box-sizing: border-box;
+            max-width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto;
         }
 
-        /* ה-iframe של נגן גוגל דרייב */
+        /* נגן גוגל דרייב בגודלו הטבעי */
         .drive-player {
             width: 100%;
-            height: 50px;
+            max-width: 500px;
+            height: 60px;
             border: none;
             background: transparent;
-            border-radius: 20px;
-            overflow: hidden;
+            border-radius: 12px;
         }
 
         /* עיצוב רשימת הפרקים */
@@ -229,8 +223,8 @@
             .header-bg {
                 padding-top: 140px; 
             }
-            .custom-audio-container {
-                width: 100%; 
+            .drive-player {
+                height: 60px;
             }
         }
     </style>
@@ -242,7 +236,6 @@
             <div class="now-playing">
                 <h2 id="current-title">טוען את הפרק האחרון...</h2>
                 <div class="custom-audio-container">
-                    <!-- החלפנו את תגית ה-audio ב-iframe של נגן גוגל דרייב היציב -->
                     <iframe id="audio-player" class="drive-player" allow="autoplay"></iframe>
                 </div>
             </div>
@@ -495,7 +488,6 @@
             const player = document.getElementById('audio-player');
             const titleElement = document.getElementById('current-title');
 
-            // טעינת תצוגת הנגן המובנה של גוגל דרייב בתוך ה-iframe
             player.src = "https://drive.google.com/file/d/" + driveId + "/preview";
             titleElement.innerText = "מתנגן כעת: " + title;
         }
