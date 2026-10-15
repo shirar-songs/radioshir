@@ -468,7 +468,7 @@
             const titleElement = document.getElementById('current-title');
 
             // טעינה ישירה של הקובץ מהדרייב לתוך נגן האודיו באתר
-            player.src = "https://docs.google.com/uc?export=download&id=" + driveId;
+           player.src = "https://drive.google.com/uc?export=open&id=" + driveId;
             titleElement.innerText = "מתנגן כעת: " + title;
             player.load();
 
