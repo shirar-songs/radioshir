@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>הרדיו שלי</title>
     
-    <!-- טעינת הפונט Assistant מ-Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* הגדרת פונט ההנצחה 'OH Tamir Adar' מתוך קבצי ה-Web */
         @font-face {
             font-family: 'OHTamirAdar';
             src: url('OHTamirAdar-Regular.woff2') format('woff2'),
@@ -20,7 +18,6 @@
             font-style: normal;
         }
 
-        /* הגדרת פונט 'סיגלית' המעודכנת לפי הקובץ ב-GitHub */
         @font-face {
             font-family: 'Sigalit';
             src: url('sigalit-regular-fm.otf') format('opentype');
@@ -28,7 +25,6 @@
             font-style: normal;
         }
 
-        /* ביטול שוליים והגדרת רקע שמנת קבוע לכל העמוד */
         html, body {
             margin: 0;
             padding: 0;
@@ -41,7 +37,6 @@
             align-items: center;
         }
 
-        /* אזור הלוגו העליון - עוטף את הנגן והכותרת */
         .header-bg {
             width: 100%;
             max-width: 600px; 
@@ -56,7 +51,6 @@
             padding-top: 180px; 
         }
 
-        /* אפקט המיזוג החלק של התמונה אל תוך השמנת בתחתית אזור הלוגו */
         .header-bg::after {
             content: '';
             position: absolute;
@@ -69,7 +63,6 @@
             pointer-events: none;
         }
 
-        /* מיכל התוכן הראשי */
         .container {
             width: 100%; 
             max-width: 540px;
@@ -82,7 +75,6 @@
             padding: 0 10px;
         }
 
-        /* אזור הנגן המרכזי */
         .now-playing {
             background: transparent;
             padding: 10px 0;
@@ -96,7 +88,6 @@
             width: 100%;
         }
 
-        /* שורת "מתנגן כעת" בפונט סיגלית */
         .now-playing h2 {
             font-family: 'Sigalit', sans-serif;
             font-size: 22px;
@@ -107,37 +98,27 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* עיצוב הנגן השחור המעוגל המקורי שאהבת! */
-        .custom-audio-container {
+        /* תיבת נגן מרובעת נקייה שבה יושב נגן האודיו הרגיל */
+        .player-box {
             width: 100%;
-            max-width: 380px;
-            background-color: #222222;
-            border-radius: 30px;
-            padding: 10px 20px;
-            border: 1px solid #ebdcc5;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-width: 400px;
+            background: #ffffff;
+            border: 2px solid #ebdcc5;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
             box-sizing: border-box;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin: 0 auto;
         }
 
         audio {
             width: 100%;
-            height: 40px;
             outline: none;
         }
 
-        /* הודעת טעינה מעוצבת בזמן שליפת הקובץ מהדרייב */
-        #load-status {
-            font-size: 13px;
-            color: #800020;
-            margin-top: 8px;
-            font-weight: 600;
-        }
-
-        /* עיצוב רשימת הפרקים */
         .playlist-wrapper {
             width: 90%;
             max-width: 500px;
@@ -150,7 +131,6 @@
             padding: 0 2px;
         }
 
-        /* כותרת "פרקים נוספים" בפונט תמיר אדר */
         .playlist h3 {
             font-family: 'OHTamirAdar', sans-serif;
             font-size: 26px;
@@ -163,7 +143,6 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* כרטיסיות הפרקים */
         .track-item {
             display: flex;
             justify-content: space-between;
@@ -181,7 +160,6 @@
             background: #fdfbf7;
         }
 
-        /* שמות הפרקים ברשימה בפונט סיגלית */
         .track-title {
             font-family: 'Sigalit', sans-serif;
             font-weight: 700;
@@ -211,7 +189,6 @@
             display: none; 
         }
 
-        /* כפתור נגן בפונט תמיר אדר */
         .play-btn {
             background: #800020;
             color: #fdfbf7;
@@ -228,15 +205,6 @@
         .play-btn:hover {
             background: #9e1331;
         }
-
-        @media (max-width: 450px) {
-            .header-bg {
-                padding-top: 140px; 
-            }
-            .custom-audio-container {
-                width: 100%; 
-            }
-        }
     </style>
 </head>
 <body>
@@ -244,12 +212,11 @@
     <div class="header-bg">
         <div class="container">
             <div class="now-playing">
-                <h2 id="current-title">טוען את הפרק האחרון...</h2>
-                <div class="custom-audio-container">
-                    <!-- חזרנו לתגית ה-audio השחורה והמעוגלת המקורית! -->
-                    <audio id="audio-player" controls preload="auto"></audio>
+                <h2 id="current-title">טוען את הפרק...</h2>
+                <div class="player-box">
+                    <!-- נגן שמע מקומי שנטען דינמית לתוך האתר -->
+                    <audio id="audio-player" controls preload="metadata"></audio>
                 </div>
-                <div id="load-status"></div>
             </div>
         </div>
     </div>
@@ -496,41 +463,19 @@
             });
         }
 
-        // פונקציה חכמה ששולפת את הקובץ מהדרייב ועוקפת את החסימה דרך יצירת קישור מקומי
-        async function loadTrack(driveId, title, autoPlay = false) {
+        function loadTrack(driveId, title, autoPlay = false) {
             const player = document.getElementById('audio-player');
             const titleElement = document.getElementById('current-title');
-            const statusElement = document.getElementById('load-status');
 
+            // טעינה ישירה של הקובץ מהדרייב לתוך נגן האודיו באתר
+            player.src = "https://docs.google.com/uc?export=download&id=" + driveId;
             titleElement.innerText = "מתנגן כעת: " + title;
-            statusElement.innerText = "טוען פרק מהדרייב...";
+            player.load();
 
-            try {
-                // כתובת ההורדה הישירה של גוגל דרייב
-                const url = "https://docs.google.com/uc?export=download&id=" + driveId;
-                
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('שגיאה בטעינת הקובץ');
-                
-                const blob = await response.blob();
-                const blobUrl = URL.createObjectURL(blob);
-
-                player.src = blobUrl;
-                statusElement.innerText = ""; // מנקה את הודעת הטעינה כשהכל מוכן
-                
-                player.load();
-                if (autoPlay) {
-                    player.play().catch(e => console.log("הדפדפן דרש לחיצה ידנית להפעלה"));
-                }
-            } catch (error) {
-                // גיבוי למקרה שהדרייב מחזיר שגיאת CORS דפדפנית - נטען בשיטה הישירה
-                console.log("משתמש בשיטת גיבוי ישירה לדרייב");
-                player.src = "https://docs.google.com/uc?export=download&id=" + driveId;
-                statusElement.innerText = "";
-                player.load();
-                if (autoPlay) {
-                    player.play().catch(e => {});
-                }
+            if (autoPlay) {
+                player.play().catch(error => {
+                    console.log("נדרשת לחיצה ידנית להפעלה:", error);
+                });
             }
         }
 
@@ -556,7 +501,7 @@
                 }
             });
 
-            // טעינת הפרק הראשון בפתיחת האתר בלי ניגון אוטומטי
+            // טעינת הפרק הראשון בפתיחת העמוד בלי ניגון אוטומטי
             const firstTrack = document.querySelector('.track-item');
             if (firstTrack) {
                 const firstId = firstTrack.getAttribute('data-id');
