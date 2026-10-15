@@ -107,13 +107,13 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* עיצוב חדש, נקי, סימטרי לחלוטין ומעוצב לנגן האודיו HTML5 */
+        /* עיצוב המיכל הכהה והמעוגל סביב נגן הדרייב */
         .custom-audio-container {
             width: 100%;
             max-width: 380px;
             background-color: #222222;
             border-radius: 30px;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border: 1px solid #ebdcc5;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             box-sizing: border-box;
@@ -123,10 +123,14 @@
             margin: 0 auto;
         }
 
-        audio {
+        /* ה-iframe של נגן גוגל דרייב */
+        .drive-player {
             width: 100%;
-            height: 40px;
-            outline: none;
+            height: 50px;
+            border: none;
+            background: transparent;
+            border-radius: 20px;
+            overflow: hidden;
         }
 
         /* עיצוב רשימת הפרקים */
@@ -238,7 +242,8 @@
             <div class="now-playing">
                 <h2 id="current-title">טוען את הפרק האחרון...</h2>
                 <div class="custom-audio-container">
-                    <audio id="audio-player" controls></audio>
+                    <!-- החלפנו את תגית ה-audio ב-iframe של נגן גוגל דרייב היציב -->
+                    <iframe id="audio-player" class="drive-player" allow="autoplay"></iframe>
                 </div>
             </div>
         </div>
@@ -486,20 +491,13 @@
             });
         }
 
-        function loadTrack(driveId, title, shouldPlay = false) {
+        function loadTrack(driveId, title) {
             const player = document.getElementById('audio-player');
             const titleElement = document.getElementById('current-title');
 
-            // שימוש בקישור הצפייה וההזרמה הישירה של גוגל דרייב שמפעיל את הנגן כראוי
-            player.src = "https://docs.google.com/uc?export=view&id=" + driveId;
+            // טעינת תצוגת הנגן המובנה של גוגל דרייב בתוך ה-iframe
+            player.src = "https://drive.google.com/file/d/" + driveId + "/preview";
             titleElement.innerText = "מתנגן כעת: " + title;
-            player.load();
-
-            if (shouldPlay) {
-                player.play().catch(error => {
-                    console.log("הדפדפן מנע ניגון אוטומטי:", error);
-                });
-            }
         }
 
         function clickTrack(buttonElement) {
@@ -507,7 +505,7 @@
             const driveId = trackItem.getAttribute('data-id');
             const title = trackItem.getAttribute('data-title');
             
-            loadTrack(driveId, title, true);
+            loadTrack(driveId, title);
             
             localStorage.setItem('listened-' + title, 'true');
             trackItem.querySelector('.listened-tag').style.display = 'inline-block';
@@ -527,8 +525,8 @@
             const firstTrack = document.querySelector('.track-item');
             if (firstTrack) {
                 const firstId = firstTrack.getAttribute('data-id');
-                const firstTrackTitle = firstTrack.getAttribute('data-title');
-                loadTrack(firstId, firstTrackTitle, false);
+                const firstTitle = firstTrack.getAttribute('data-title');
+                loadTrack(firstId, firstTitle);
             }
         };
     </script>
