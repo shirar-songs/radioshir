@@ -490,8 +490,8 @@
             const player = document.getElementById('audio-player');
             const titleElement = document.getElementById('current-title');
 
-            // תיקון כתובת ה-URL לגוגל דרייב כך שתוריד/תנגן את הקובץ הישיר ולא את עמוד ה-HTML
-            player.src = "https://docs.google.com/uc?export=download&id=" + driveId;
+            // שימוש בקישור הצפייה וההזרמה הישירה של גוגל דרייב שמפעיל את הנגן כראוי
+            player.src = "https://docs.google.com/uc?export=view&id=" + driveId;
             titleElement.innerText = "מתנגן כעת: " + title;
             player.load();
 
@@ -527,9 +527,8 @@
             const firstTrack = document.querySelector('.track-item');
             if (firstTrack) {
                 const firstId = firstTrack.getAttribute('data-id');
-                const firstTitle = firstTrack.getAttribute('data-title');
-                // בטעינת העמוד הראשונית לא נפעיל אוטומטית (false) כדי להימנע فحסימת דפדפן, אלא רק נטען את הנגן
-                loadTrack(firstId, firstTitle, false);
+                const firstTrackTitle = firstTrack.getAttribute('data-title');
+                loadTrack(firstId, firstTrackTitle, false);
             }
         };
     </script>
