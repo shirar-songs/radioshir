@@ -81,7 +81,8 @@
             box-sizing: border-box;
             padding: 0 10px;
         }
-/* אזור הנגן המרכזי */
+
+        /* אזור הנגן המרכזי */
         .now-playing {
             background: transparent;
             padding: 10px 0;
@@ -93,8 +94,8 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            position: relative; /* שונה: נוסף */
-            z-index: 5;         /* שונה: נוסף */
+            position: relative;
+            z-index: 5;
         }
 
         /* שורת "מתנגן כעת" בפונט סיגלית */
@@ -107,30 +108,38 @@
             font-weight: 700;
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
-/* מיכל הנגן של גוגל דרייב */
+
+        /* שונה: מיכל הנגן של דרייב - נגן מוקטן */
         .drive-player-container {
             position: relative;
+            direction: ltr;              /* שונה: נוסף, כדי שההקטנה תעבוד נכון בדף מימין לשמאל */
             width: 100%;
-            max-width: 360px;
-            height: 80px;       /* שונה: היה 60px */
-            border-radius: 16px; /* שונה: היה 30px */
+            max-width: 300px;            /* שונה: היה 360px */
+            height: 64px;
+            border-radius: 16px;
             overflow: hidden;
             border: 1px solid #ebdcc5;
-            background-color: #222222;
+            background-color: #2a2a2b;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             box-sizing: border-box;
             margin: 0 auto;
-            z-index: 5;         /* שונה: נוסף */
+            z-index: 5;
         }
 
-        /* שונה: הנגן ממלא את המיכל בלי הזזה ובלי חיתוך */
+        /* שונה: ה-iframe מוגדל פי 1.43 ואז מוקטן ל-70%, כך שכל הנגן נראה קטן יותר */
         iframe {
-            width: 100%;
-            height: 100%;       /* שונה: היה 90px */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 143%;
+            height: 143px;
             border: none;
             display: block;
-            margin: 0;          /* שונה: היה margin-top: -15px */
+            margin: 0;
+            transform: scale(0.7);
+            transform-origin: top left;
         }
+
         /* עיצוב רשימת הפרקים */
         .playlist-wrapper {
             width: 90%;
@@ -143,7 +152,8 @@
             text-align: right;
             padding: 0 2px;
         }
-/* כותרת "פרקים נוספים" בפונט תמיר אדר */
+
+        /* כותרת "פרקים נוספים" בפונט תמיר אדר */
         .playlist h3 {
             font-family: 'OHTamirAdar', sans-serif;
             font-size: 26px; /* מעודכן ל-26px */
@@ -227,8 +237,9 @@
                 padding-top: 140px; 
             }
             .drive-player-container {
-                width: 100%; 
-                height: 80px; /* שונה: נוסף */
+                width: 100%;
+                max-width: 280px;        /* שונה: נוסף */
+                height: 64px;
             }
         }
     </style>
