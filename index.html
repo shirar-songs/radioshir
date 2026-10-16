@@ -109,12 +109,12 @@
             text-shadow: 1px 1px 3px rgba(252, 249, 242, 0.9);
         }
 
-        /* שונה: מיכל הנגן של דרייב - נגן מוקטן */
+        /* מיכל הנגן של דרייב - נגן מוקטן */
         .drive-player-container {
             position: relative;
-            direction: ltr;              /* שונה: נוסף, כדי שההקטנה תעבוד נכון בדף מימין לשמאל */
+            direction: ltr;
             width: 100%;
-            max-width: 300px;            /* שונה: היה 360px */
+            max-width: 300px;
             height: 64px;
             border-radius: 16px;
             overflow: hidden;
@@ -126,11 +126,11 @@
             z-index: 5;
         }
 
-        /* שונה: ה-iframe מוגדל פי 1.43 ואז מוקטן ל-70%, כך שכל הנגן נראה קטן יותר */
+        /* שונה: ה-iframe מוזז שמאלה כדי שכפתור "הרחב" של גוגל ייחתך מחוץ למיכל */
         iframe {
             position: absolute;
             top: 0;
-            left: 0;
+            left: -40px;               /* שונה: היה 0 */
             width: 143%;
             height: 143px;
             border: none;
@@ -138,6 +138,18 @@
             margin: 0;
             transform: scale(0.7);
             transform-origin: top left;
+        }
+
+        /* שונה: נוסף. שכבה בצבע הנגן בפינה הימנית העליונה, חוסמת לחיצה בטעות על "הרחב" */
+        .drive-player-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 30px;
+            background-color: #2a2a2b;
+            z-index: 10;
         }
 
         /* עיצוב רשימת הפרקים */
@@ -238,7 +250,7 @@
             }
             .drive-player-container {
                 width: 100%;
-                max-width: 280px;        /* שונה: נוסף */
+                max-width: 280px;
                 height: 64px;
             }
         }
